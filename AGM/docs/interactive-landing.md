@@ -20,15 +20,13 @@ Fonts and GSAP are vendored, so the page works offline when served from a laptop
 |---|---|
 | Hook (first visit, and again once 5 minutes have passed since it was last shown) | The official NORDIK logo appears on paper; CSS paints it from the first frame, so nothing half-built shows while the scripts load. Its emblem dissolves into points as the lights go down. The lettering glides to the top-left, and "Annual General Meeting · 2025–2026" then glows in beneath it. The points regather into a large point-cloud emblem, and the posters arrive in orbit. It plays at half speed, about 8 s. Skip with Esc, Enter, a scroll or the "Skip intro" button. Visits within 5 minutes of it open with a quick gather; the time is kept in `localStorage` as `agm-hook-shown-at`. |
 | Executive summary | Under the lettering in the hero, card by card after it lands, with icons modelled on the PDF: collaborations and projects, the four strategic goals, Indigenous leadership and the team. On phones one card shows at a time and cycles (tap for the next). |
-| Hero | The cloud tilts toward the pointer and parts around it; ring, lakes and pictograph sit at different depths. Hovering a poster point previews it and lights its line to Sault Ste. Marie; selecting it opens the story. Scrolling away streams the points past the viewer. |
+| Hero | The cloud tilts toward the pointer and parts around it; ring, lakes and pictograph sit at different depths. Hovering a poster point previews it and lights its line to Sault Ste. Marie; selecting it opens the poster. Scrolling away streams the points past the viewer. |
 | Header | The white header holds only the NORDIK logo and three tabs: **Posters**, **Projects** and **Annual Report**. It is transparent over the hero and stays shown from the poster wall down, with the current tab underlined. On phones the logo and tab text shrink so all three fit (below 375 px the last tab reads "Report"). |
-| Posters | The twelve posters as a tight tile wall, with no headings around them. On screens wider than 760 px the wall is exactly one screen tall: six columns with 6 px gaps (two featured posters take a 2×2 tile), with the grid's width worked out from the height left under the white header (logo and tabs, Posters active), so every poster shows whole on any desktop or laptop. The header stays shown over the wall and no poster sits beneath it. A scroll that stops between the hero and the wall settles on the wall. Portrait tablets get a 4×3 grid; phones get two scrolling columns. Hovering or focusing a tile flips it to show the poster's title, a one-line summary on the featured tiles, and its research team or partners. Clicking opens the poster in the story pop-up. |
+| Posters | The twelve posters as a tight tile wall, with no headings around them. On screens wider than 760 px the wall is exactly one screen tall: six columns with 6 px gaps (two featured posters take a 2×2 tile), with the grid's width worked out from the height left under the white header (logo and tabs, Posters active), so every poster shows whole on any desktop or laptop. The header stays shown over the wall and no poster sits beneath it. A scroll that stops between the hero and the wall settles on the wall. Portrait tablets get a 4×3 grid; phones get two scrolling columns. Hovering or focusing a tile flips it to show the poster's title, a one-line summary on the featured tiles, and its research team or partners. Clicking opens the poster itself. |
 | Projects | All 22 projects of the year as a numbered list: the project, then each lead beside their email (mailto links), aligned down the list on desktop and stacked on phones. The data is `assets/project-list.json`. The ten projects with a poster on the wall have a "View poster" button that opens it. |
 | Annual Report | A placeholder until the report PDF is supplied: a cover, a "Coming soon" note and a link to the executive summary PDF. To publish the report, save the PDF in `assets/reports/` and replace the placeholder in the `#report` section of `index.html`. |
 | Footer | Just the NORDIK website and the contact email. |
-| Story dialog | Poster with zoom, summary, research question, headline figures, findings, people, and links to the full project page and the PDF. Deep-link with `#story/<slug>`. ← and → move between stories; Esc closes. |
-
-The two Residential Schools posters (CSAA) appear as neutral markers in the orbit rather than thumbnails. On the wall they show in full and carry a "Content note" label, and they open behind a content note that includes the Indian Residential Schools Crisis Line.
+| Poster viewer | The poster fills the window, with zoom. Deep-link with `#story/<slug>`. ← and → move between posters; Esc closes. There is no written summary. |
 
 `prefers-reduced-motion: reduce` turns off the hook and all scroll-driven motion, and the wall tiles fade to their backs instead of turning. The cloud is drawn once, assembled and still. Without WebGL, the static emblem is shown and the poster points still work.
 
@@ -40,11 +38,11 @@ The two Residential Schools posters (CSAA) appear as neutral markers in the orbi
 
 ## Editing content
 
-**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.22` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
+**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.23` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
 
 
 - **Projects list:** `assets/project-list.json` (title, leads with optional email, and an optional `poster` slug that adds the "View poster" button).
-- **Posters:** `assets/projects.json`. Images are found by `slug` in `assets/thumbs/`, `assets/previews/` and `assets/posters/`. `sensitive: true` gives the content-note treatment described above.
+- **Posters:** `assets/projects.json`. Images are found by `slug` in `assets/thumbs/`, `assets/previews/` and `assets/posters/`.
 - **Short names and the name-spelling normalisation:** `js/data.js`.
 - **Executive-summary figures:** `index.html`, `#summary` (each number is in `data-n`).
 - **The hub:** `HUB_UV` in `js/hero.js` is the St. Marys River on the emblem, as fractions of its width and height.
@@ -62,7 +60,7 @@ AGM/
   js/pointcloud.js    WebGL renderer: emblem sampling, intro → dust → home motion, 3D tilt
   js/wall.js          poster tile wall (flip on hover, click to open)
   js/project-list.js  Projects tab: renders assets/project-list.json
-  js/dialog.js        story dialog, zoom, content gate, deep links
+  js/dialog.js        poster viewer, zoom, deep links
   js/motion.js        reveals and count-ups
   js/nav.js           solid/hidden nav, section marking, smooth links
   js/data.js          loads projects.json
@@ -73,7 +71,7 @@ AGM/
   assets/             posters, previews, thumbnails, projects.json, reports/
 ```
 
-**Coexistence with the generated exhibition.** In the published repository this page is the `/AGM/` landing page. The pages generated by `tools/build.py` stay as they were: `projects/<slug>/` (the QR-code destinations), `wall/`, `tour/`, `people/` and the rest. Each story links to its project page, and the nav's Exhibition link opens `explore/`. `tools/build.py` also writes `index.html`, so leave that file out when copying a fresh build into `AGM/`.
+**Coexistence with the generated exhibition.** In the published repository this page is the `/AGM/` landing page. The pages generated by `tools/build.py` stay as they were: `projects/<slug>/` (the QR-code destinations), `wall/`, `tour/`, `people/` and the rest. `tools/build.py` also writes `index.html`, so leave that file out when copying a fresh build into `AGM/`.
 
 ## Testing
 
@@ -81,9 +79,8 @@ AGM/
 
 - the hook: half-speed timing, the 5-minute replay window, the top-left lettering and glowing AGM line, and skipping;
 - the point cloud;
-- poster previews and opening stories;
-- the content gate;
-- the poster wall (tight grid, no headings, one full screen at 1440×900 and 1536×730, the scroll snap, hover flip with title and authors, click to the pop-up);
+- poster previews and opening the poster;
+- the poster wall (tight grid, no headings, one full screen at 1440×900 and 1536×730, the scroll snap, hover flip with title and authors, click to the poster);
 - the header tabs, the project list (22 projects, 40 leads, 39 email links, 10 poster links) and the annual report placeholder;
 - deep links, reduced motion, and mobile at 390 px.
 

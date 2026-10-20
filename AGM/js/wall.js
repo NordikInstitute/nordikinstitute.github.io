@@ -1,6 +1,6 @@
 // The research wall: the twelve posters as tightly packed tiles. Hovering (or
 // focusing) a tile flips it to show the title and authors; clicking opens the
-// poster in the story dialog (handled globally through [data-open]).
+// poster (handled globally through [data-open]).
 
 import { esc, fragment } from './util.js';
 
@@ -18,14 +18,12 @@ function people(p) {
 function tile(p) {
   const who = people(p);
   const large = LARGE.has(p.slug);
-  const note = p.sensitive ? '<span class="tile__note">Content note</span>' : '';
   return `
-  <div class="tile${large ? ' tile--lg' : ''}${p.sensitive ? ' tile--note' : ''}" role="listitem">
+  <div class="tile${large ? ' tile--lg' : ''}" role="listitem">
     <button class="tile__btn" type="button" data-open="${esc(p.slug)}" aria-label="${esc(`Open poster ${p.num}: ${p.title}`)}">
       <span class="tile__inner">
         <span class="tile__face tile__front">
           <img src="${esc(p.thumb)}" alt="" width="640" height="853" loading="lazy" decoding="async">
-          ${note}
         </span>
         <span class="tile__face tile__back" aria-hidden="true">
           <small>${p.num} · ${esc(p.categoryLabel)}</small>

@@ -128,9 +128,7 @@ html.is-hook .hero__glow { opacity: 0; }
   transition: --hs 0.5s var(--ease), box-shadow 0.4s, opacity 0.4s, border-color 0.3s; opacity: var(--o, 1);
 }
 .pp img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 3px; }
-.pp--note { border-radius: 50%; width: 30px; margin: -15px 0 0 -15px; aspect-ratio: 1; background: radial-gradient(circle, rgba(255, 90, 114, 0.9) 0 22%, rgba(166, 29, 51, 0.35) 40%, transparent 70%); border-color: rgba(255, 140, 155, 0.6); }
 .pp:hover, .pp:focus-visible { --hs: 2.5; z-index: 5; border-color: var(--white); box-shadow: 0 0 0 1px var(--white), 0 24px 50px -12px rgba(0, 0, 0, 0.9), 0 0 40px 0 rgba(91, 155, 240, 0.6); outline: none; }
-.pp--note:hover, .pp--note:focus-visible { --hs: 1.6; }
 .orbit.has-focus .pp:not(:hover):not(:focus-visible) { opacity: 0.35; }
 .pp__label {
   position: absolute; z-index: 6; left: 0; top: 0; width: max-content; max-width: 260px; padding: 12px 14px; border-radius: 10px; pointer-events: none;
@@ -230,7 +228,6 @@ html:not(.is-hook) .hook-skip { display: none; }
 .tile__face { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .tile__front { background: var(--night-2); }
 .tile__front img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.9s var(--ease), filter 0.5s; }
-.tile__note { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 6px 10px; border-radius: 999px; background: rgba(3, 13, 28, 0.82); border: 1px solid rgba(255, 140, 155, 0.5); font: 600 0.62rem/1 var(--f-sans); letter-spacing: 0.18em; text-transform: uppercase; color: #ffd3da; white-space: nowrap; }
 .tile__back {
   transform: rotateY(180deg); display: flex; flex-direction: column; gap: clamp(5px, 4.5cqi, 10px); padding: clamp(10px, 7cqi, 22px);
   background: linear-gradient(160deg, #0d2a52 0%, #071a33 55%, #030d1c 100%); border: 1px solid rgba(159, 186, 221, 0.28); color: var(--white);
@@ -307,40 +304,21 @@ a.plist__email:hover { text-decoration: underline; }
 .foot a { color: var(--mist); text-decoration: none; font: 600 0.74rem/1.4 var(--f-sans); letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid var(--rule-dark); }
 .foot a:hover { color: var(--white); border-color: var(--pale); }
 
-/* ---------- Story dialog ---------- */
-.story { width: min(1240px, calc(100vw - 32px)); height: calc(100svh - 32px); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 14px; background: var(--white); color: var(--ink); overflow: hidden; box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.6); }
+/* ---------- Poster viewer ---------- */
+/* The poster fills the dialog. Controls sit over it; there is no written summary. */
+.story { width: min(920px, calc(100vw - 32px)); height: calc(100svh - 32px); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 14px; background: #0a1426; color: var(--white); overflow: hidden; box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.6); }
 .story::backdrop { background: rgba(3, 13, 28, 0.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.story__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); height: 100%; }
-.story__poster { position: relative; overflow: hidden; background: #0a1426; display: grid; }
+.story__poster { position: relative; height: 100%; overflow: hidden; background: #0a1426; display: grid; }
 .story__poster img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.55s var(--ease), opacity 0.4s; }
 .story__poster.is-zoomed img { cursor: zoom-out; }
 .story__poster.is-loading img { opacity: 0; }
-.story__zoom { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 8px; }
-.story__zoom .btn { min-height: 40px; padding: 0 16px; background: rgba(3, 13, 28, 0.82); }
-.story__zoom .btn:hover { background: var(--white); }
-.story__gate { position: absolute; inset: 0; display: grid; place-content: center; gap: 16px; padding: 32px; text-align: center; color: var(--white); background: #0a1426; }
-.story__gate p { max-width: 34ch; color: var(--mist); }
-.story__body { overflow-y: auto; overscroll-behavior: contain; padding: 0 clamp(24px, 3.6vw, 56px) 56px; }
-.story__bar { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 0 calc(-1 * clamp(24px, 3.6vw, 56px)); padding: 14px clamp(24px, 3.6vw, 56px); background: rgba(255, 255, 255, 0.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule-light); }
-.story__bar .count { font: 600 0.7rem/1 var(--f-sans); letter-spacing: 0.2em; color: var(--ink-soft); }
-.story__bar div { display: flex; gap: 8px; }
-.story__meta { margin-top: 32px; font: 600 0.68rem/1.5 var(--f-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
-.story__title { margin-top: 14px; font: 400 clamp(2.1rem, 3.4vw, 3.2rem)/1.04 var(--f-serif); letter-spacing: -0.01em; }
-.story__subtitle { margin-top: 12px; font: italic 400 1.3rem/1.35 var(--f-serif); color: var(--blue); }
-.story__intro { margin-top: 22px; font-size: 1.06rem; line-height: 1.65; color: #23344d; }
-.story__q { margin-top: 28px; padding: 20px 22px; border-left: 3px solid var(--red); background: #f3f6fb; border-radius: 0 10px 10px 0; font: 400 1.25rem/1.35 var(--f-serif); }
-.story__metrics { display: flex; flex-wrap: wrap; gap: 28px 40px; margin-top: 30px; }
-.story__metrics b { display: block; font: 400 2.6rem/0.95 var(--f-serif); color: var(--blue); }
-.story__metrics span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-soft); max-width: 18ch; }
-.story__sec { margin-top: 32px; }
-.story__sec h3 { margin-bottom: 12px; font: 600 0.68rem/1 var(--f-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
-.story__sec ul { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; color: #23344d; }
-.story__sec li::marker { color: var(--red); }
-.story__sec p { color: #23344d; }
-.story__note { margin-top: 24px; padding: 16px 18px; border-radius: 10px; background: #fbeef0; border: 1px solid #efc4cb; font-size: 0.95rem; line-height: 1.5; }
-.story__note strong { display: block; margin-bottom: 4px; font: 600 0.68rem/1 var(--f-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
-.story__note a { font-weight: 600; }
-.story__actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
+.story__bar { position: absolute; z-index: 2; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; background: linear-gradient(to bottom, rgba(3, 13, 28, 0.72), transparent); }
+.story__bar .count { font: 600 0.7rem/1 var(--f-sans); letter-spacing: 0.2em; color: var(--pale); }
+.story__bar div { display: flex; align-items: center; gap: 8px; }
+.story__bar .icon-btn { border-color: rgba(255, 255, 255, 0.35); color: var(--white); background: rgba(3, 13, 28, 0.45); }
+.story__bar .icon-btn:hover { background: var(--white); color: var(--night); }
+.story__bar .btn { min-height: 44px; padding: 0 16px; background: rgba(3, 13, 28, 0.45); }
+.story__bar .btn:hover { background: var(--white); }
 
 .notice { position: fixed; left: 50%; top: 16px; transform: translateX(-50%); z-index: 400; max-width: min(640px, calc(100vw - 32px)); padding: 14px 18px; border-radius: 12px; background: var(--red); color: #fff; font-size: 0.95rem; }
 
@@ -367,13 +345,9 @@ a.plist__email:hover { text-decoration: underline; }
   .hero__kicker { font-size: 0.62rem; letter-spacing: 0.17em; }
   .hero__cue { display: none; }
   .pp { width: 30px; margin: -20px 0 0 -15px; }
-  .pp--note { width: 22px; margin: -11px 0 0 -11px; }
   .pp:hover, .pp:focus-visible { --hs: 1.4; }
   .pp__label { display: none; }
   .story { width: 100vw; height: 100svh; border-radius: 0; }
-  .story__grid { display: block; height: 100%; overflow-y: auto; }
-  .story__poster { height: 56svh; }
-  .story__body { overflow: visible; }
 }
 /* Narrower screens: the list stacks (project, then leads with their emails). */
 @media (max-width: 900px) {

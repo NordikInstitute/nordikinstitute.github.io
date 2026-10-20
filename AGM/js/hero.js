@@ -53,9 +53,7 @@ export function initHero({ projectsP, onOpen, mode }) {
   // ---------- Poster points (built when the data arrives) ----------
   const orbitReady = projectsP.then((list) => {
     projects = list;
-    orbit.innerHTML = list.map((p, i) => p.sensitive
-      ? `<button class="pp pp--note" type="button" data-i="${i}" aria-label="${esc(`Story ${p.num}: ${p.shortTitle} (content note)`)}"></button>`
-      : `<button class="pp" type="button" data-i="${i}" aria-label="${esc(`Story ${p.num}: ${p.shortTitle}`)}"><img src="${esc(p.thumb)}" alt="" width="640" height="853" decoding="async"></button>`).join('');
+    orbit.innerHTML = list.map((p, i) => `<button class="pp" type="button" data-i="${i}" aria-label="${esc(`Poster ${p.num}: ${p.shortTitle}`)}"><img src="${esc(p.thumb)}" alt="" width="640" height="853" decoding="async"></button>`).join('');
     points = [...orbit.children];
     linksSvg.innerHTML = list.map(() => '<line x1="0" y1="0" x2="0" y2="0"/>').join('');
     lines = [...linksSvg.children];
@@ -183,7 +181,7 @@ export function initHero({ projectsP, onOpen, mode }) {
     lines.forEach((l, k) => l.classList.toggle('is-on', k === i));
     if (on) {
       const p = projects[i];
-      label.innerHTML = `<small>${p.num} · ${esc(p.categoryLabel)}</small><strong>${esc(p.shortTitle)}</strong><span>${p.sensitive ? 'Content note: Residential Schools' : esc(p.label)}</span>`;
+      label.innerHTML = `<small>${p.num} · ${esc(p.categoryLabel)}</small><strong>${esc(p.shortTitle)}</strong><span>${esc(p.label)}</span>`;
       if (reduced) placeOrbit(0);
     }
     label.classList.toggle('is-on', on);
