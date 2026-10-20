@@ -1,12 +1,15 @@
 // Hero: the NORDIK hook and the orbiting posters.
 //
-// Hook (first visit): the official logo is painted by CSS from the first
-// frame (the splash). Once it has finished revealing, its Great Lakes emblem
+// Hook (first visit): the official logo is drawn by CSS (the splash). Once it has finished revealing, its Great Lakes emblem
 // dissolves into points that scatter across the screen while the lights go
 // down and the lettering glides into place; the points regather into a
 // large, tilting point-cloud emblem; the twelve posters arrive in orbit, each
 // linked by a line to Sault Ste. Marie, where NORDIK is based.
 // The hook never waits for the poster data: the orbit joins when it arrives.
+//
+// For the 20th anniversary, "20th Anniversary Celebration" sits under the logo
+// in the splash (js/anniversary.js). It vanishes with the logo: as the lights
+// go down it brightens, then dissolves into glowing particles.
 
 import { PointCloud, project, loadImage } from './pointcloud.js';
 import { esc } from './util.js';
@@ -22,7 +25,7 @@ const SHOWN_KEY = 'agm-hook-shown-at'; // read by the inline head script: replay
 // Where the lettering and emblem sit inside the full logo (viewBox 2 150 1981 538).
 const LOGO = { w: 1981, h: 538, mark: [11, 12, 1571, 414], emblem: [1440, 15, 540, 507] };
 
-export function initHero({ projectsP, onOpen, mode }) {
+export function initHero({ projectsP, onOpen, mode, opening }) {
   const hero = document.getElementById('top');
   const canvas = document.getElementById('cloud');
   const orbit = document.getElementById('orbit');
@@ -91,12 +94,16 @@ export function initHero({ projectsP, onOpen, mode }) {
     }
   }
 
-  // Lockup = the splash: wordmark + emblem exactly where the CSS splash draws them.
+  // Lockup = the splash: wordmark + emblem exactly where the CSS splash draws
+  // them. Read from the splash itself (it sits higher when the anniversary
+  // text is beneath it); the formula is the fallback.
   function lockup() {
-    const L = st.W < 761 ? st.W * 0.9 : Math.min(st.W * 0.78, 980);
+    const sr = splash.getBoundingClientRect();
+    const hr = hero.getBoundingClientRect();
+    const L = sr.width || (st.W < 761 ? st.W * 0.9 : Math.min(st.W * 0.78, 980));
     const k = L / LOGO.w;
-    const x = (st.W - L) / 2;
-    const y = (st.H - LOGO.h * k) / 2;
+    const x = sr.width ? sr.left - hr.left : (st.W - L) / 2;
+    const y = sr.width ? sr.top - hr.top : (st.H - LOGO.h * k) / 2;
     const [ex, ey, ew, eh] = LOGO.emblem;
     const h = (ew * k) / EMBLEM_ASPECT;
     return {
@@ -297,6 +304,8 @@ export function initHero({ projectsP, onOpen, mode }) {
       gsap.set(mark, { clearProps: 'all' });
       st.light = 0;
       finishHook();
+      opening?.dusk(0.6);
+      opening?.dissolve();
       arriveOrbit();
       return;
     }
@@ -304,8 +313,10 @@ export function initHero({ projectsP, onOpen, mode }) {
 
     // Dissolve only once the splash has finished drawing, never earlier: read the
     // CSS reveal's real remaining time (it starts at first paint, not at a fixed clock).
+    // With the anniversary text beneath it, also wait until that has been read.
     const reveal = splash.getAnimations?.()[0];
-    const left = reveal ? Math.max(0, (reveal.effect.getComputedTiming().endTime - (reveal.currentTime ?? 0)) / 1000) : Math.max(0, SPLASH_DONE - performance.now() / 1000);
+    const drawn = reveal ? Math.max(0, (reveal.effect.getComputedTiming().endTime - (reveal.currentTime ?? 0)) / 1000) : Math.max(0, SPLASH_DONE - performance.now() / 1000);
+    const left = Math.max(drawn, opening?.holdFor() ?? 0);
     // Timeline positions are in timeline time; at half speed the hold must be
     // halved so the dissolve still starts right after the splash is drawn.
     const dev = parseFloat(new URLSearchParams(location.search).get('hookspeed'));
@@ -323,6 +334,8 @@ export function initHero({ projectsP, onOpen, mode }) {
     }, B)
       .to(st, { light: 0, duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
       .to(hero, { backgroundColor: '#030d1c', duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
+      // The anniversary text turns to particles at the same instant as the emblem.
+      .add(() => { opening?.dusk(1.3 / tl.timeScale()); opening?.dissolve(); }, B)
       .to('.hero__glow', { opacity: 1, duration: 1.6 }, B + 0.35)
       .to(mark, { '--wm-main': '#f4f8fd', '--wm-accent': '#ff5a72', duration: 1.1, ease: 'power2.inOut' }, B + 0.15)
       .to(mark, { x: 0, y: 0, scale: 1, duration: 1.4, ease: 'expo.inOut' }, B + 0.55)
@@ -335,7 +348,7 @@ export function initHero({ projectsP, onOpen, mode }) {
     // Half speed by default; ?hookspeed=0.25 (dev aid for capture) slows it further.
     tl.timeScale(speed);
     // Any deliberate input fast-forwards the hook.
-    const skip = () => { tl.timeScale(5); off(); };
+    const skip = () => { tl.timeScale(5); opening?.skip(); off(); };
     const keys = (e) => { if (['Escape', 'Enter', ' ', 'ArrowDown', 'PageDown', 'Tab'].includes(e.key)) skip(); };
     const off = () => {
       window.removeEventListener('wheel', skip);

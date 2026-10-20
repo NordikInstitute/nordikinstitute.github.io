@@ -197,6 +197,88 @@ html.is-hook .hook-splash {
 @keyframes splash-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 /* Until the hook choreographs them, nothing half-built shows through. */
 html.is-hook #hero-mark, html.is-hook #hero-kicker, html.is-hook .summary:not(.is-live) .sum-card, html.is-hook .hero__cue, html.is-hook .hub { opacity: 0; }
+/* 20th anniversary: a cinematic title card under the Great Lakes emblem of the
+   logo in the splash (the logo moves up to make room). Once the logo is fully
+   drawn, "Anniversary Celebration" slides in first, in polished brand-blue
+   metal with its own light sweep; then "20th" comes down beside it on the
+   same line in polished gold, settles into focus and flares as a light sweep
+   glints across it, and a warm streak of light crosses the whole title. As the lights
+   go down (anniv-dusk) the subtitle turns silver; the script then hides the
+   title with the logo, in one instant, as its letters turn into the particles
+   of #anniv-sky. */
+@property --as1 { syntax: '<color>'; inherits: true; initial-value: #5d97d8; }
+@property --as2 { syntax: '<color>'; inherits: true; initial-value: #0054a6; }
+@property --as3 { syntax: '<color>'; inherits: true; initial-value: #002a5c; }
+.anniv { display: none; }
+html.anniv-on { --anniv-lift: clamp(16px, 3.5vh, 36px); --logo-w: min(78vw, 980px); }
+html.anniv-on .hook-splash { top: calc(50% - var(--anniv-lift)); }
+html.anniv-on .anniv { display: block; position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.anniv__text {
+  --cut: -15%;
+  --as1: #5d97d8; --as2: #0054a6; --as3: #002a5c;
+  /* One line, close under the logo, ending at its right edge (under the Great Lakes emblem). */
+  position: absolute; right: calc(50% - var(--logo-w) / 2);
+  top: calc(50% - var(--anniv-lift) + var(--logo-w) * 0.1358 + clamp(2px, 0.6vh, 8px));
+  display: flex; align-items: center; gap: 0.6em; margin: 0; white-space: nowrap;
+  font-size: clamp(0.85rem, 0.4rem + 1.35vw, 1.4rem);
+  transition: --as1 1.4s, --as2 1.4s, --as3 1.4s;
+}
+/* The dissolve mask only once the reveal is over: before that it would clip
+   the glow and the light streak to the text's box. */
+html.anniv-dusk .anniv__text {
+  --as1: #ffffff; --as2: #c9d7ea; --as3: #6f88aa;
+  -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--cut) - 8%), #000 calc(var(--cut) + 8%));
+  mask-image: linear-gradient(90deg, transparent calc(var(--cut) - 8%), #000 calc(var(--cut) + 8%));
+}
+/* Metal: a hard bright band mid-letter over a deep base, plus a highlight band
+   (the first layer) that sits off to the side until the sweep carries it across. */
+.anniv__num, .anniv__line {
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  background-size: 260% 100%, 100% 100%; background-position: 0% 0, 0 0; background-repeat: no-repeat;
+}
+.anniv__num {
+  font: 500 1.55em/1 var(--f-serif); letter-spacing: -0.01em; color: #b8862a;
+  background-image:
+    linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.95) 47%, rgba(255, 246, 214, 0.6) 50%, transparent 57%),
+    linear-gradient(180deg, #fff6dc 0%, #f0cc6e 20%, #8a5a10 46%, #fff0bf 52%, #d8a23c 70%, #6b4508 100%);
+  animation: anniv-title 1s var(--ease) 1.95s backwards, anniv-sweep 0.85s var(--ease-io) 2.6s, anniv-glow 1.4s ease-out 2.6s;
+}
+.anniv__num sup { font-style: italic; font-size: 0.38em; vertical-align: top; position: relative; top: 0.32em; margin-left: 0.04em; }
+.anniv__words { display: flex; gap: 0.6em; animation: anniv-sub 0.9s var(--ease) 1.05s backwards; }
+.anniv__line {
+  display: block; margin-right: -0.34em; font: 500 1em/1 var(--f-serif); letter-spacing: 0.34em; text-transform: uppercase; color: var(--as2);
+  background-image:
+    linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.95) 47%, rgba(222, 236, 255, 0.6) 50%, transparent 57%),
+    linear-gradient(180deg, var(--as1) 0%, var(--as2) 46%, var(--as3) 52%, var(--as1) 60%, var(--as2) 100%);
+  animation: anniv-sweep 0.8s var(--ease-io) 1.5s, anniv-glow-blue 1.2s ease-out 1.5s;
+}
+/* A warm streak of light that crosses the whole title as the "20th" lands. */
+.anniv__flare {
+  position: absolute; left: -25%; right: -25%; top: 50%; height: 5em; margin-top: -2.5em; pointer-events: none; opacity: 0;
+  background:
+    radial-gradient(closest-side, rgba(255, 250, 230, 1), rgba(255, 210, 110, 0.55) 35%, transparent 72%) center / 22% 100% no-repeat,
+    linear-gradient(90deg, transparent, rgba(255, 214, 130, 0.9) 50%, transparent) center / 100% 4% no-repeat,
+    linear-gradient(90deg, transparent 20%, rgba(255, 230, 170, 0.35) 50%, transparent 80%) center / 100% 18% no-repeat;
+  animation: anniv-flare 1.1s var(--ease-io) 2.75s;
+}
+@keyframes anniv-title { from { opacity: 0; transform: translateY(-1.1em) scale(1.3); filter: blur(10px); } 60% { filter: blur(0); } }
+@keyframes anniv-sub { from { opacity: 0; filter: blur(6px); transform: translateX(-0.8em); } }
+@keyframes anniv-sweep { from { background-position: 100% 0, 0 0; } to { background-position: 0% 0, 0 0; } }
+@keyframes anniv-glow {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(232, 178, 70, 0)); }
+  35% { filter: drop-shadow(0 0 10px rgba(255, 196, 80, 1)) drop-shadow(0 0 28px rgba(232, 160, 40, 0.8)); }
+}
+@keyframes anniv-glow-blue {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(60, 130, 230, 0)); }
+  35% { filter: drop-shadow(0 0 12px rgba(60, 130, 230, 0.85)); }
+}
+@keyframes anniv-flare {
+  0% { opacity: 0; transform: translateX(-35%) scaleX(0.6); }
+  45% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(35%) scaleX(1.1); }
+}
+.hero .anniv-sky { pointer-events: none; opacity: 0; }
+
 html.is-hook:not(.hook-live) .hook-skip { visibility: hidden; }
 .hook-skip { position: absolute; z-index: 4; right: var(--gutter); bottom: 22px; border: 0; background: none; cursor: pointer; font: 600 0.66rem/1 var(--f-sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 0; }
 html:not(.is-hook) .hook-skip { display: none; }
@@ -330,6 +412,9 @@ a.plist__email:hover { text-decoration: underline; }
 }
 @media (max-width: 760px) {
   html.is-hook .hook-splash { width: 90vw; }
+  html.anniv-on { --logo-w: 90vw; }
+  .anniv__text { font-size: 0.74rem; gap: 0.5em; }
+  .anniv__line { letter-spacing: 0.2em; margin-right: -0.2em; }
   /* Phones: two columns that scroll; there is no room to fit one screen. */
   .wall { --cols: 2; --gap: 4px; display: block; min-height: 0; padding: calc(var(--nav-h) + 6px) 4px 40px; }
   .wall__grid { width: auto; }
@@ -371,7 +456,7 @@ a.plist__email:hover { text-decoration: underline; }
   .nav__long { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hook-splash { display: none !important; }
+  .hook-splash, .anniv { display: none !important; }
   /* Reduced motion: no 3D turn; the back simply fades in. */
   .tile__inner { transform: none !important; }
   .tile__back { transform: none; opacity: 0; }

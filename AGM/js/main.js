@@ -4,6 +4,7 @@
 
 import { loadProjects } from './data.js';
 import { initHero } from './hero.js';
+import { initAnniversary } from './anniversary.js';
 import { initWall } from './wall.js';
 import { initProjectList } from './project-list.js';
 import { initStory } from './dialog.js';
@@ -17,12 +18,13 @@ gsap.registerPlugin(ScrollTrigger);
 async function boot() {
   const root = document.documentElement;
   // A deep link to a story skips the hook: the reader came for that poster.
-  if (/^#story\//.test(location.hash)) root.classList.remove('is-hook', 'is-locked');
+  if (/^#story\//.test(location.hash)) root.classList.remove('is-hook', 'is-locked', 'anniv-on');
   const mode = prefersReduced() ? 'static' : root.classList.contains('is-hook') ? 'hook' : 'quick';
 
   const projectsP = loadProjects();
   let story = null;
-  const hero = initHero({ projectsP, onOpen: (slug) => story?.open(slug), mode });
+  const opening = initAnniversary({ mode });
+  const hero = initHero({ projectsP, onOpen: (slug) => story?.open(slug), mode, opening });
   initNav();
   initProjectList();
 
