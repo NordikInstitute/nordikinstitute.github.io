@@ -7,14 +7,19 @@ export function initNav() {
   const nav = document.getElementById('nav');
   const links = [...nav.querySelectorAll('a[href^="#"]')].filter((a) => a.getAttribute('href').length > 1 && a.getAttribute('href') !== '#top');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // From the poster wall down (posters, projects, annual report) the white
+  // header with its tabs always shows; the sections' top padding leaves room
+  // for it, so nothing sits underneath.
+  const wall = document.getElementById('posters');
 
   ScrollTrigger.create({
     start: 0,
     end: 'max',
     onUpdate(self) {
       const y = self.scroll();
+      const atWall = wall && wall.getBoundingClientRect().top < window.innerHeight * 0.15;
       nav.classList.toggle('is-solid', y > window.innerHeight * 0.6);
-      nav.classList.toggle('is-hidden', self.direction === 1 && y > window.innerHeight * 0.9 && !nav.contains(document.activeElement));
+      nav.classList.toggle('is-hidden', !atWall && self.direction === 1 && y > window.innerHeight * 0.9 && !nav.contains(document.activeElement));
     },
   });
 

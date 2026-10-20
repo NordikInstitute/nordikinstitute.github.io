@@ -1,0 +1,165 @@
+{
+  "note": "The Projects tab. Leads and emails as supplied by NORDIK for the 2025-2026 AGM; 'poster' is the slug in projects.json when the project has a poster on the wall.",
+  "projects": [
+    {
+      "title": "Anji inaashkawun - Waves of Change",
+      "leads": [
+        { "name": "Dr. Jody Rebek", "email": "jody.rebek@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Beyond Financial Incentives: Lessons on Rural Physician Recruitment",
+      "poster": "rural-physician-recruitment",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Community Reclamation, Revitalization, Regeneration & Resilience",
+      "leads": [
+        { "name": "Dr. Laura Wyper", "email": "laura.wyper@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Community Support Team: Ongoing support for Children of Shingwauk Alumni Association",
+      "poster": "csaa-ongoing-support",
+      "leads": [
+        { "name": "Tara Burrell", "email": "Tara.Burrell@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Community Support Team: The Unmarked Burial Project",
+      "poster": "csaa-unmarked-burials",
+      "leads": [
+        { "name": "Tara Burrell", "email": "Tara.Burrell@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Counting Every Voice: Building Better Evidence for Northern Communities",
+      "poster": "counting-every-voice",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Cultural and Creative Industries: A pro-active, future-focused approach to community resilience",
+      "leads": [
+        { "name": "Dr. Jude Ortiz", "email": "jude.ortiz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Data North Dashboard: Illuminating Paths for Progress in Northern Ontario",
+      "poster": "data-north",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Zamilur Rahman", "email": "zamilur.rahman@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" },
+        { "name": "Dr. Teryn Bruni", "email": "teryn.bruni@algomau.ca" }
+      ]
+    },
+    {
+      "title": "From Evidence to Everyday Support: Rethinking ADHD in the Workplace",
+      "poster": "adhd-workplace",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Ajmery Sultana", "email": "ajmery.sultana@algomau.ca" }
+      ]
+    },
+    {
+      "title": "From News to Financial Stress: A High-Frequency Canadian Index Assessment Tool",
+      "poster": "canadian-financial-stress-index",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Zamilur Rahman", "email": "zamilur.rahman@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Global Decolonial Education Initiative - Strengthening networks for alternative education structures",
+      "leads": [
+        { "name": "Dr. Sheila Gruner", "email": "sheila.gruner@algomau.ca" }
+      ]
+    },
+    {
+      "title": "GLOCAL: Global Mindsets for Local Regenerative Futures",
+      "leads": [
+        { "name": "Dr. Jody-Lynn Rebek", "email": "jody.rebek@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Intercultural, Experiential, Decolonizing Learning and the Faculty of Cross-Cultural Studies",
+      "leads": [
+        { "name": "Dr. Sheila Gruner", "email": "sheila.gruner@algomau.ca" },
+        { "name": "Dr. Vivian Jimenez-Estrada", "email": "vivian.jimenez-estrada@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Keepers of the Circle Entrepreneurship Program",
+      "leads": [
+        { "name": "Amy Boyer" },
+        { "name": "Elizabeth MacMillan", "email": "elizabethe.macmillan@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Leveraging Newcomers’ Skill Sets to Tackle Labour Shortages in Northern Ontario",
+      "poster": "newcomer-skills",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Ahmed Aziz", "email": "ahmed.aziz@algomau.ca" },
+        { "name": "Dr. Zamilur Rahman", "email": "zamilur.rahman@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Mask-wa Oo-ta-ban: Cree for Bear Train",
+      "leads": [
+        { "name": "Dr. Linda Savory-Gordon", "email": "linda.savory-gordon@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Measuring What Matters: Strengthening the Valuing Ontario Libraries Toolkit (VOLT)",
+      "poster": "volt-libraries",
+      "leads": [
+        { "name": "Dr. Tamanna Rimi", "email": "tamanna.rimi@algomau.ca" },
+        { "name": "Dr. Sean Meades", "email": "sean.meades@algomau.ca" },
+        { "name": "Dr. Jude Ortiz", "email": "jude.ortiz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Toward a Provincial Organization for Community Engaged Artists",
+      "leads": [
+        { "name": "Dr. Jude Ortiz", "email": "jude.ortiz@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Transdisciplinary Leader Development for Sustainability",
+      "leads": [
+        { "name": "Dr. Laura Wyper", "email": "laura.wyper@algomau.ca" },
+        { "name": "Dr. Jody-Lynn Rebek", "email": "jody.rebek@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Water Team: Empowering communities to steward local waters",
+      "leads": [
+        { "name": "Dr. Elaine Ho-Tassone", "email": "elaine.ho-tassone@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Water Team: The next four years",
+      "leads": [
+        { "name": "Corrina Barrett", "email": "cbarrett@ssmrca.ca" },
+        { "name": "Dr. Elaine Ho-Tassone", "email": "elaine.ho-tassone@algomau.ca" }
+      ]
+    },
+    {
+      "title": "Weather Stations and Spruce Budworm Moth Detection",
+      "poster": "spruce-budworm-radar",
+      "leads": [
+        { "name": "Dr. Jennie Pearce", "email": "jlpearce@shaw.ca" },
+        { "name": "Dr. Jean-Noel Candau", "email": "jean-noel.candau@nrcan-rncan.gc.ca" }
+      ]
+    }
+  ]
+}

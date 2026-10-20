@@ -1,10 +1,11 @@
 // NORDIK Institute — AGM 2025–2026.
 // Boot: the hero (hook, point cloud) starts at once; the poster data loads
-// in parallel and the orbit, story dialog and shelf join as soon as it lands.
+// in parallel and the orbit, story dialog and poster wall join as soon as it lands.
 
 import { loadProjects } from './data.js';
 import { initHero } from './hero.js';
-import { initShelf } from './shelf.js';
+import { initWall } from './wall.js';
+import { initProjectList } from './project-list.js';
 import { initStory } from './dialog.js';
 import { initMotion, refreshOnSettle, prefersReduced } from './motion.js';
 import { initNav } from './nav.js';
@@ -23,6 +24,7 @@ async function boot() {
   let story = null;
   const hero = initHero({ projectsP, onOpen: (slug) => story?.open(slug), mode });
   initNav();
+  initProjectList();
 
   let projects;
   try {
@@ -37,7 +39,7 @@ async function boot() {
     const t = e.target.closest('[data-open]');
     if (t && !t.closest('dialog')) story.open(t.dataset.open);
   });
-  initShelf({ projects });
+  initWall({ projects });
   initMotion();
   refreshOnSettle();
 
