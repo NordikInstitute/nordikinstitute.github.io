@@ -1,0 +1,678 @@
+[
+  {
+    "slug": "spruce-budworm-radar",
+    "title": "Spruce Budworm Radar Segmentation",
+    "shortTitle": "Mapping the night flight of spruce budworm",
+    "subtitle": "Can weather radar help us detect insect migrations before outbreaks spread?",
+    "category": "ai",
+    "tags": [
+      "Artificial intelligence",
+      "Forest health",
+      "Remote sensing",
+      "Environment"
+    ],
+    "intro": "Migrating spruce budworm moths can carry destructive forest outbreaks across large distances. This study investigates whether deep learning can identify moth swarms in weather radar and follow their movements through the night.",
+    "question": "Can weather radar and deep learning reliably identify migrating spruce budworm swarms?",
+    "methods": [
+      "Use weather radar volumes and expert annotations of budworm swarms.",
+      "Train an Attention U-Net to segment swarm patterns.",
+      "Compare predicted masks with annotations using Dice, precision and recall."
+    ],
+    "findings": [
+      "The poster reports analysis of 2,052 radar scenes across 57 experiments.",
+      "Overall experimental results: macro Dice 0.635, precision 0.636, and recall 0.827.",
+      "On one illustrated night, Dice scores at 04:30, 05:00, 06:00, 07:00, 08:30 and 11:00 were 0.700, 0.734, 0.789, 0.822, 0.698 and 0.431.",
+      "The poster states that those night-time scores are exact 480 by 480 pack values, with no spatial smoothing, and that vertical effects in the figure are for display only."
+    ],
+    "impact": "The research explores a potential new way to study migrating pests and support forest-health monitoring. Field deployment or operational early-warning performance is not claimed.",
+    "metrics": [
+      [
+        "2,052",
+        "radar scenes"
+      ],
+      [
+        "57",
+        "experiments"
+      ],
+      [
+        "0.827",
+        "recall"
+      ]
+    ],
+    "status": "Experimental research",
+    "team": [
+      "Dr. Jennie Pearce",
+      "Dr. Jean-Noel Candau",
+      "Dr. Elaine Ho-Tassoni",
+      "Eyad Gad"
+    ],
+    "partners": [
+      "Natural Resources Canada"
+    ],
+    "externalLinks": [],
+    "pdfSource": "Updated - gad_spruce_budworm_poster.pdf",
+    "sensitive": false,
+    "related": [
+      "water-quality-monitoring",
+      "data-north",
+      "canadian-financial-stress-index"
+    ],
+    "sourceNote": "The supplied PDF has no text layer. Figures, the night-time Dice sequence and team names were transcribed from the poster image. Field deployment is not claimed."
+  },
+  {
+    "slug": "data-north",
+    "title": "DATA NORTH",
+    "shortTitle": "A clearer picture of Northern Ontario",
+    "subtitle": "An accessible platform for exploring the data behind Northern communities.",
+    "category": "ai",
+    "tags": [
+      "AI assistant",
+      "Community data",
+      "Northern Ontario",
+      "Evidence-based planning"
+    ],
+    "intro": "Good local decisions need trustworthy local evidence. DATA NORTH brings socio-economic, health, housing and environmental indicators together for Northern Ontario communities, with a conversational assistant, NIA, meant to help people interpret what the data shows.",
+    "question": "How can Northern Ontario communities better discover and understand local data?",
+    "methods": [
+      "Organize indicators across socio-economic, health, housing and environmental categories.",
+      "Offer filters, community selectors, historical trends and data-download links.",
+      "Provide a conversational assistant, NIA, described on the poster as giving source-aware guidance."
+    ],
+    "findings": [
+      "The poster presents NIA as a live assistant and DATA NORTH as a platform already in use.",
+      "The stated next step is coverage of more communities. That expansion is planned, not described as complete."
+    ],
+    "impact": "Designed to support community development, research and evidence-based planning by making local information easier to discover.",
+    "metrics": [],
+    "status": "Live platform; expansion planned",
+    "team": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Dr. Zamilur Rahman",
+      "Dr. Teryn Bruni",
+      "Dr. Muhammad Azam",
+      "Md Soaib Hossain",
+      "Nazmul Hossen",
+      "Mushfika Latif",
+      "Quazi Nazmus Sakib",
+      "Nitin Bhatti"
+    ],
+    "partners": [
+      "DEScIDE Research Lab"
+    ],
+    "externalLinks": [
+      {
+        "title": "Explore DATA NORTH",
+        "url": "https://www.data-north.ca"
+      }
+    ],
+    "pdfSource": "DATANORTH presentation poster (2).pdf",
+    "sensitive": false,
+    "related": [
+      "canadian-financial-stress-index",
+      "counting-every-voice",
+      "newcomer-skills"
+    ],
+    "sourceNote": "The assistant is described as live on the poster; this exhibition has not independently evaluated it. A small interface mockup on the poster contains unclear wording and is not treated as a product claim."
+  },
+  {
+    "slug": "water-quality-monitoring",
+    "title": "Community-Based Water Quality Monitoring in the Upper Great Lakes",
+    "shortTitle": "Communities protecting their waters",
+    "subtitle": "Building local knowledge and capacity from Lake Superior to Lake Huron.",
+    "category": "environment",
+    "tags": [
+      "Water",
+      "Citizen science",
+      "Community-led research",
+      "Youth engagement"
+    ],
+    "intro": "From the lower Lake Superior watershed to the North Shore of Lake Huron, communities are leading efforts to understand and protect their waterways. The project supports training, field monitoring, tools and local decision-making.",
+    "question": "How can communities build the skills, evidence and partnerships to protect their own waters?",
+    "methods": [
+      "Support communities to identify their monitoring sites and priorities.",
+      "Provide training, field supplies and specialized expertise.",
+      "Carry out chemistry, eDNA and insect monitoring, and build regional methods."
+    ],
+    "findings": [
+      "From 2021 to 2026, more than 200 volunteers monitored 46 sites and collected more than 45,000 data points over 465 visits.",
+      "More than 10,000 people were reached through more than 40 public events, and the poster reports more than 75,000 social media impressions.",
+      "Sixty-seven youth were mentored, trained or hired: 52 Indigenous youth interns and hires from 15 First Nations across Canada, and 15 post-secondary placements.",
+      "Eight communities benefited from pilot programming; four now independently manage expanded permanent programs.",
+      "Two public campaigns, on microplastics and road salts in the St. Marys River, are reported as completed.",
+      "Two community-driven projects on nutrients and E. coli, in the lower Lake Superior watershed and on Lake Huron's North Shore, are reported as started, with completion planned by March 2027."
+    ],
+    "impact": "The reported achievements show community participation, monitoring capacity and youth training; environmental changes in water quality are not quantified in this poster.",
+    "metrics": [
+      [
+        "200+",
+        "volunteers"
+      ],
+      [
+        "46",
+        "monitoring sites"
+      ],
+      [
+        "45k+",
+        "data points"
+      ],
+      [
+        "67",
+        "youth involved"
+      ],
+      [
+        "75k+",
+        "social impressions"
+      ]
+    ],
+    "status": "Five-year achievements, 2021–2026",
+    "team": [],
+    "partners": [
+      "Canada Water Agency",
+      "Sault Ste. Marie Region Conservation Authority"
+    ],
+    "externalLinks": [],
+    "pdfSource": "2026 Water Poster.pdf",
+    "sensitive": false,
+    "related": [
+      "spruce-budworm-radar",
+      "data-north",
+      "in-situ"
+    ],
+    "sourceNote": "Individual authors are not separately identified on the supplied poster. Partner names are taken from the logos printed on the poster. Achievement counts are for this project from 2021 to 2026, not institute-wide annual totals."
+  },
+  {
+    "slug": "canadian-financial-stress-index",
+    "title": "From News to Financial Stress: A High-Frequency Canadian Index",
+    "shortTitle": "What can the news tell us about financial stress?",
+    "subtitle": "Building a timely Canadian financial indicator from news narratives.",
+    "category": "finance",
+    "tags": [
+      "Finance",
+      "Financial stress",
+      "Natural language processing",
+      "Canada"
+    ],
+    "intro": "Canada's usual financial-stress measures lean on markets and institutions. This project builds a daily Financial Stress Index from posts by five national news outlets on X, so news narratives can be read alongside those established measures.",
+    "question": "Can patterns in Canadian financial news provide a timely signal of financial stress?",
+    "methods": [
+      "Collect 649,804 posts from five Canadian national news outlets on X, from January 2017 to December 2024, using Apify workflows and web scraping, and remove duplicate posts.",
+      "The poster gives the source mix as CTV News 274,692 posts (42.27%), National Post 152,952 (23.54%), Global News 130,030 (20.01%), CBC News 81,721 (12.58%) and The Canadian Press 10,409 (1.60%).",
+      "Preprocess the text, expand a financial dictionary, and keep posts according to their similarity with that vocabulary.",
+      "Score sentiment with FinBERT2019, FinBERT2020, FinVADER and the Loughran-McDonald dictionary, then aggregate a daily index using Dawid-Skene.",
+      "Compare the proposed index with the benchmarks the poster names as EPU, CFSI and VIX."
+    ],
+    "findings": [
+      "The poster reports that the index aligns with established financial-stress measures.",
+      "It reports early-warning signals and sensitivity to major Canadian financial events.",
+      "It reports that relationships with the comparison measures are stronger during high-stress periods.",
+      "The chart is annotated with COVID-19, monetary tightening and tariff uncertainty. Those labels are the poster's own annotations."
+    ],
+    "impact": "The proposed index could complement traditional measurements. The poster lists further validation, data expansion and integration with DATA NORTH as next steps, not as completed work.",
+    "metrics": [
+      [
+        "649,804",
+        "news posts on X"
+      ],
+      [
+        "2017-24",
+        "study window"
+      ],
+      [
+        "5",
+        "national news outlets"
+      ]
+    ],
+    "status": "Presented at CEA 2026; manuscript in preparation",
+    "team": [
+      "Dr. Zamilur Rahman",
+      "Dr. Ahmed Aziz",
+      "Dr. Tamanna Rimi",
+      "Eyad Gad",
+      "Md. Soaib Hossain"
+    ],
+    "partners": [],
+    "externalLinks": [],
+    "pdfSource": "Revised_From News to Financial Stress.pdf",
+    "sensitive": false,
+    "related": [
+      "data-north",
+      "spruce-budworm-radar",
+      "volt-libraries"
+    ],
+    "sourceNote": "Outlet counts and shares are transcribed from the poster and sum to the stated corpus. This exhibition has not independently validated the index. Integration with DATA NORTH is described as planned, not completed."
+  },
+  {
+    "slug": "volt-libraries",
+    "title": "V.O.L.T. — Valuing Ontario Libraries Toolkit",
+    "shortTitle": "Making the value of libraries visible",
+    "subtitle": "Measuring libraries' social return across communities in Ontario.",
+    "category": "economics",
+    "tags": [
+      "Education",
+      "Libraries",
+      "Social return on investment",
+      "Economics",
+      "Civic engagement"
+    ],
+    "intro": "Libraries are more than books. NORDIK Institute and Ontario Library Service developed a common Social Return on Investment framework so public libraries can describe their value, starting with education and reaching across culture, inclusion, leisure, economic development, civic engagement and space.",
+    "question": "How can Ontario's public libraries communicate the breadth of their social and economic value?",
+    "methods": [
+      "Develop a shared Social Return on Investment framework based on engagement across Ontario.",
+      "Measure value through seven domains: education, culture, inclusion and wellbeing, entertainment and leisure, economic development, civic engagement, and space.",
+      "Gather feedback from toolkit users and revise the resource."
+    ],
+    "findings": [
+      "The province-wide toolkit launched in December 2023, building on the 2016 Valuing Northern Libraries Toolkit.",
+      "The poster reports that many Ontario libraries now use the toolkit to generate Library Value Reports.",
+      "The current project phase is focused on revisions based on user feedback."
+    ],
+    "impact": "The toolkit offers a shared way for libraries to communicate their value to funders, partners and communities.",
+    "metrics": [
+      [
+        "7",
+        "domains of impact"
+      ],
+      [
+        "2023",
+        "province-wide launch"
+      ]
+    ],
+    "status": "Toolkit in use; revision underway",
+    "team": [
+      "Dr. Tamanna Rimi",
+      "Dr. Sean Meades",
+      "Dr. Jude Ortiz",
+      "Harsh Morye",
+      "Mayesha Verma"
+    ],
+    "partners": [
+      "Ontario Library Service"
+    ],
+    "externalLinks": [
+      {
+        "title": "Explore the VOLT toolkit",
+        "url": "https://resources.olservice.ca/volt"
+      }
+    ],
+    "pdfSource": "VOLT_2026_Poster.pdf",
+    "sensitive": false,
+    "related": [
+      "in-situ",
+      "counting-every-voice",
+      "data-north"
+    ],
+    "sourceNote": "Usage is reported qualitatively; no exact number of libraries is given."
+  },
+  {
+    "slug": "newcomer-skills",
+    "title": "Leveraging Newcomers' Skill to Tackle Labour Shortages in Northern Ontario",
+    "shortTitle": "Connecting newcomer skills and opportunity",
+    "subtitle": "Understanding workplace barriers and opportunities in Sault Ste. Marie.",
+    "category": "workforce",
+    "tags": [
+      "Immigration",
+      "Employment",
+      "Labour shortages",
+      "Northern Ontario"
+    ],
+    "intro": "Northern Ontario faces workforce shortages even as newcomers bring education, qualifications and experience. This project aims to understand the gap between newcomer skills and employer needs, and to support more effective workforce strategies.",
+    "question": "What prevents newcomer skills from being recognized and matched with local employment?",
+    "methods": [
+      "Conduct the Sault Newcomer Survey 2026. The poster addresses people who moved to Sault Ste. Marie after September 2021.",
+      "Hold partner, employer and job-developer engagement sessions.",
+      "Document newcomer education, skills, qualifications, employment experience and barriers to work.",
+      "A skills-based dashboard and coordinated workforce strategies are described as work the project will do."
+    ],
+    "findings": [
+      "The poster outlines an ongoing survey and engagement programme rather than final outcome estimates.",
+      "A skills-based dashboard and coordinated development strategies are planned."
+    ],
+    "impact": "The project aims to improve skills matching, meaningful employment and local economic development; these are intended outcomes, not measured final impacts.",
+    "metrics": [],
+    "status": "Survey and stakeholder engagement underway in 2026",
+    "team": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Dr. Zamilur Rahman",
+      "Quazi Nazmus Sakib",
+      "Nazmul Hossen"
+    ],
+    "partners": [
+      "Algoma Workforce Investment Corporation",
+      "Sault Community Career Centre",
+      "City of Sault Ste. Marie",
+      "Sault College",
+      "Community Builders",
+      "Sault Ste. Marie and Area Local Immigration Partnership",
+      "Superior Adult Learning",
+      "Northland Adult Learning Centre",
+      "Government of Ontario"
+    ],
+    "externalLinks": [],
+    "pdfSource": "Poster 1 ROD_revised.pdf",
+    "sensitive": false,
+    "related": [
+      "counting-every-voice",
+      "data-north",
+      "adhd-workplace"
+    ],
+    "sourceNote": "The poster prints nordiksurvey.ca; it is not made a live recruitment CTA until survey status is confirmed."
+  },
+  {
+    "slug": "counting-every-voice",
+    "title": "Counting Every Voice: Building Better Evidence for Northern Communities",
+    "shortTitle": "When local surveys miss part of the story",
+    "subtitle": "Examining how immigrant surveys represent the communities they describe.",
+    "category": "workforce",
+    "tags": [
+      "Survey methods",
+      "Immigration",
+      "Evidence quality",
+      "Public policy"
+    ],
+    "intro": "Local immigrant surveys guide settlement planning, but they can differ substantially from population benchmarks. This study reviews Canadian municipal survey practices and explores where and why results diverge from census data.",
+    "question": "How accurately do local immigrant surveys reflect the people municipalities aim to serve?",
+    "methods": [
+      "Review 33 publicly identified local immigrant survey reports.",
+      "Compare sample characteristics and sizes with census benchmarks.",
+      "Study relationships between survey deviations and local or implementation characteristics."
+    ],
+    "findings": [
+      "Eighteen of 23 compared surveys (78%) showed major divergence from census benchmarks in at least one category.",
+      "The poster reports that area-level characteristics were collectively associated with survey deviations, but measured implementation characteristics were not.",
+      "One comparison-point statistic on the original poster contains an internal discrepancy and is withheld from the summary pending verification."
+    ],
+    "impact": "The analysis contributes to better survey design and interpretation for community planning; recommendations should be read in light of the study's review status.",
+    "metrics": [
+      [
+        "33",
+        "reports reviewed"
+      ],
+      [
+        "18 of 23",
+        "surveys with major divergence"
+      ]
+    ],
+    "status": "Manuscript under review (as stated on poster)",
+    "team": [
+      "Dr. Ahmed Aziz",
+      "Dr. Tamanna Rimi",
+      "Quazi Nazmus Sakib"
+    ],
+    "partners": [],
+    "externalLinks": [],
+    "pdfSource": "Poster 2_revised - Online Survey Manuscript.pdf",
+    "sensitive": false,
+    "related": [
+      "newcomer-skills",
+      "data-north",
+      "volt-libraries"
+    ],
+    "sourceNote": "Editorial QA: the poster says 39 of 64 comparison points (58%). The fraction 39/64 is about 61%, not 58%. Do not silently alter the original PDF; obtain author clarification. The about text says 33 reports were reviewed. The PRISMA figure labels the final synthesis list as n=32, after a separate targeted search of n=1. Do not treat 33, 32 and 18 of 23 as the same denominator."
+  },
+  {
+    "slug": "adhd-workplace",
+    "title": "From Evidence to Everyday Support: Rethinking ADHD in the Workplace",
+    "shortTitle": "From evidence to everyday workplace support",
+    "subtitle": "Combining research on ADHD with an in-development support app.",
+    "category": "health",
+    "tags": [
+      "ADHD",
+      "Workplace inclusion",
+      "Public health",
+      "Digital tools"
+    ],
+    "intro": "Research on the economic burden of ADHD has grown, but practical workplace support for adults remains an important gap. This project combines a review of the scientific literature with the development of a workplace-oriented support tool.",
+    "question": "What does research on ADHD's economic burden overlook, and how might workplace support address practical needs?",
+    "methods": [
+      "Conduct bibliometric and thematic analysis of literature on the economic burden of ADHD, published as an article in the Journal of Public Health in 2026.",
+      "The poster's production chart covers 2001 to 2025 and maps themes in the literature.",
+      "Develop a workplace-support prototype and review it with employers who employ people with ADHD."
+    ],
+    "findings": [
+      "A related bibliometric analysis was published in the Journal of Public Health in 2026. The poster titles it Economic burden of attention-deficit/hyperactivity disorder: a bibliometric and thematic analysis.",
+      "The poster reports that the literature remains geographically concentrated and more focused on childhood than adult ADHD.",
+      "Its country chart shows affiliation shares of 37.9% for the USA, 9.4% for Spain, 7.6% for England, 5.5% for Canada and 5.1% for the Netherlands.",
+      "A workplace app prototype is under employer review. Proposed tools include task breakdowns, priority or recency planning, guidance after mistakes, and structured coping prompts."
+    ],
+    "impact": "The intended benefit is more practical support for adults with ADHD at work. The poster does not establish clinical efficacy or effectiveness of the prototype.",
+    "metrics": [],
+    "status": "Publication in 2026; app prototype under review",
+    "team": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ajmery Sultana",
+      "Dr. Ahmed Aziz",
+      "Quazi Nazmus Sakib",
+      "Mushfika Binta Latif",
+      "Umer Khan"
+    ],
+    "partners": [],
+    "externalLinks": [],
+    "pdfSource": "Poster 3_revised - ADHD in the Workplace.pdf",
+    "sensitive": false,
+    "related": [
+      "rural-physician-recruitment",
+      "newcomer-skills",
+      "data-north"
+    ],
+    "sourceNote": "The proposed panic button, described as a way to connect a user with an expert, is under development. It is not a live medical or emergency service. Country shares are transcribed from the poster's chart."
+  },
+  {
+    "slug": "rural-physician-recruitment",
+    "title": "Beyond Financial Incentives: Lessons on Rural Physician Recruitment",
+    "shortTitle": "What brings doctors to rural communities?",
+    "subtitle": "Examining the effectiveness of financial incentives for physician supply.",
+    "category": "health",
+    "tags": [
+      "Health policy",
+      "Rural health",
+      "Labour economics",
+      "Canada"
+    ],
+    "intro": "In Canada, rural and remote communities account for about 18% of the population and are served by about 8% of physicians. This research asks whether Saskatchewan's Rural Physician Incentive Program changed the rural-urban distribution of family physicians.",
+    "question": "Can direct financial payments narrow the rural–urban physician supply gap?",
+    "methods": [
+      "Use Saskatchewan's Rural Physician Incentive Program as a natural experiment.",
+      "Combine Canadian Institute for Health Information physician data and Statistics Canada population data.",
+      "Analyze the period from 2009 to 2021."
+    ],
+    "findings": [
+      "Rural physician rates remained persistently below urban rates.",
+      "The study found no statistically robust evidence that the incentive program narrowed the rural-urban physician supply gap.",
+      "The authors suggest financial payments alone may be insufficient where structural barriers remain, including professional isolation, family employment, infrastructure and rural practice support.",
+      "The charts compare physician rates in mixed Saskatchewan regions and the rural-urban gap in Saskatchewan and Manitoba, with 2013 marked as the policy introduction. The written findings do not claim that the program closed the gap."
+    ],
+    "impact": "The findings inform policy conversations about physician recruitment and rural service access, without demonstrating that a specific alternative intervention would succeed.",
+    "metrics": [
+      [
+        "18%",
+        "of Canada's population in rural and remote areas"
+      ],
+      [
+        "8%",
+        "of physicians serving those areas"
+      ],
+      [
+        "2009-21",
+        "Saskatchewan analysis period"
+      ]
+    ],
+    "status": "Article presented as published in Social Science & Medicine (2026)",
+    "team": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Quazi Nazmus Sakib"
+    ],
+    "partners": [],
+    "externalLinks": [],
+    "pdfSource": "Poster 4_revised - Financial Incentive for Physicians.pdf",
+    "sensitive": false,
+    "related": [
+      "adhd-workplace",
+      "newcomer-skills",
+      "counting-every-voice"
+    ],
+    "sourceNote": "The 18% and 8% figures are the poster's description of the national imbalance, not a result of the Saskatchewan experiment. Publication title on the poster: Do Financial Incentives Affect Rural Physician Supply? Empirical Evidence from a Canadian Experiment. No article URL is printed as text. The poster contains a few typographical slips; the summary uses the intended wording of its findings."
+  },
+  {
+    "slug": "csaa-ongoing-support",
+    "title": "Community Support Team: Ongoing Support for Children of Shingwauk Alumni Association",
+    "shortTitle": "Supporting Survivors, families and communities",
+    "subtitle": "Indigenous-led networks of care, wellbeing and community connection.",
+    "category": "indigenous",
+    "tags": [
+      "Indigenous-led",
+      "Community wellness",
+      "Survivor support",
+      "Cultural learning"
+    ],
+    "intro": "Mino Bimaadiziwin, funded by the Ontario Ministry of Indigenous Affairs and First Nations Economic Reconciliation, supports Survivors and families from the 85 communities affected by the Shingwauk Indian Residential School. The work builds a network of health authorities, Knowledge Keepers and Elders for Indigenous-led, culturally centred programs.",
+    "question": "How can Indigenous-led support networks respond to the continuing impacts of Residential Schools?",
+    "methods": [
+      "Build relationships with health authorities, Knowledge Keepers and Elders.",
+      "Coordinate training, learning events and culturally centred workshops.",
+      "Develop a data-management initiative intended to share approved documents and resources."
+    ],
+    "findings": [
+      "On 15 and 16 August 2025 the team hosted Bigman Geophysical with members of Garden River, Chapleau Ojibway and Sagamok First Nation, staff from Algoma University and NORDIK, and Elders Harvey and Delores Trudeau.",
+      "On 9 and 10 September 2025 the team held trauma training led by Dr. Kathy Absolon. On 16 September 2025, CSAA and the team hosted a Kairos Blanket Exercise with Phil Jones.",
+      "George Diamond, Chair of CSAA, and Tara Burrell, Project Lead, presented at the National Site Search Forum from 24 to 26 March. In November and December 2025, Survivor and Elder Harvey and Delores Trudeau of Sagamok First Nation provided translation for a site-search update.",
+      "The poster describes a public launch of a resource dashboard as the final phase of a project planned to conclude in spring 2027. The launch is underway as outreach, not described as already complete."
+    ],
+    "impact": "The project centres survivor and family wellbeing. Participation in activities is documented, while long-term health outcomes are not quantified in this poster.",
+    "metrics": [],
+    "status": "Ongoing; completion planned for spring 2027",
+    "team": [],
+    "contributors": [
+      {
+        "name": "George Diamond",
+        "role": "CSAA Chair, named as a National Site Search Forum presenter"
+      },
+      {
+        "name": "Tara Burrell",
+        "role": "Project Lead, named as a National Site Search Forum presenter"
+      },
+      {
+        "name": "Elders Harvey and Delores Trudeau",
+        "role": "Named as visiting Elders and as translators of a site-search update; Sagamok First Nation"
+      },
+      {
+        "name": "Dr. Kathy Absolon",
+        "role": "Named as leading the September 2025 trauma training"
+      },
+      {
+        "name": "Phil Jones",
+        "role": "Named as facilitating the Kairos Blanket Exercise on 16 September 2025"
+      }
+    ],
+    "partners": [
+      "Children of Shingwauk Alumni Association",
+      "Ontario Ministry of Indigenous Affairs and First Nations Economic Reconciliation",
+      "Crown-Indigenous Relations and Northern Affairs Canada"
+    ],
+    "externalLinks": [],
+    "pdfSource": "CST - Ongoing Support for CSAA_revised.pdf",
+    "sensitive": true,
+    "related": [
+      "csaa-unmarked-burials",
+      "in-situ",
+      "water-quality-monitoring"
+    ],
+    "sourceNote": "Community-specific publishing approval is still the right standard for public reuse of this story. People named for a session are contributors in the poster, not an inferred author list. The dashboard public launch is planned. The poster text contains typographical slips that this summary does not repeat."
+  },
+  {
+    "slug": "csaa-unmarked-burials",
+    "title": "Community Support Team: Unmarked Burials",
+    "shortTitle": "Truth, remembrance and responsible access",
+    "subtitle": "Community-led truth-telling, investigation and stewardship of historical records.",
+    "category": "indigenous",
+    "tags": [
+      "Indigenous research sovereignty",
+      "Residential Schools",
+      "Truth-telling",
+      "Data stewardship"
+    ],
+    "intro": "The Children of Shingwauk Alumni Association and NORDIK's Community Support Team work to centre Survivors' voices and support investigations related to children who did not return home from Residential Schools.",
+    "question": "How can Survivors' truths, investigative records and community priorities be supported through respectful research and stewardship?",
+    "methods": [
+      "Support Survivor-led truth-telling and grounds-search work at the former Shingwauk Indian Residential School site.",
+      "Collaborate with the Office of the Chief Coroner of Ontario's Residential School Death Investigation Team.",
+      "Develop a cloud-based Shingwauk Database with specialist programming and data-stewardship practices."
+    ],
+    "findings": [
+      "The poster describes the co-development of the Shingwauk Database by CSAA, NORDIK's Community Support Team and the Office of the Chief Coroner of Ontario's Residential School Death Investigation Team.",
+      "Since 2021, that investigation team has worked through thousands of archived records related to deaths at Indian Residential Schools in Ontario. NORDIK staff built the cloud database and its stewardship tools.",
+      "The poster documents Survivors and families at the former Shingwauk site during the Life After Residential School gathering in August 2025.",
+      "The poster shows a secure sign-in to the database. Access to records is not represented as public or unrestricted."
+    ],
+    "impact": "The project aims to improve appropriately governed access to records and support community-led truth-telling. Sensitive data remain protected.",
+    "metrics": [],
+    "status": "Ongoing community-led investigation and records work",
+    "team": [],
+    "partners": [
+      "Children of Shingwauk Alumni Association",
+      "Office of the Chief Coroner of Ontario — Residential School Death Investigation Team",
+      "Crown-Indigenous Relations and Northern Affairs Canada"
+    ],
+    "externalLinks": [],
+    "pdfSource": "CST - Unmarked Burials.pdf",
+    "sensitive": true,
+    "related": [
+      "csaa-ongoing-support",
+      "data-north",
+      "in-situ"
+    ],
+    "sourceNote": "Publication and image permissions should be confirmed with CSAA. Do not link to or expose protected database contents. Logo organizations are named as printed; a logo is not treated as a personal credit."
+  },
+  {
+    "slug": "in-situ",
+    "title": "IN SITU — Place-based Innovation of Cultural and Creative Industries in Non-Urban Areas",
+    "shortTitle": "Creative futures beyond the city",
+    "subtitle": "Rethinking how cultural and creative industries strengthen non-urban places.",
+    "category": "culture",
+    "tags": [
+      "Arts and culture",
+      "Creative industries",
+      "Rural development",
+      "Place-based innovation"
+    ],
+    "intro": "The four-year IN SITU project investigated innovation in cultural and creative industries in non-urban European regions. Its themes resonate with opportunities and barriers facing Northern Ontario's creative sector.",
+    "question": "How can creative industries contribute to resilience and economic renewal outside major cities?",
+    "methods": [
+      "Combine research with experimental actions in non-urban European areas.",
+      "Examine barriers including access to support, training, networking and data.",
+      "Contribute international advice, roundtables, report reviews and conference presentations."
+    ],
+    "findings": [
+      "The project connects cultural and creative activity with identity, belonging, learning, enjoyment, tourism, economic diversification and regeneration.",
+      "The poster identifies obstacles that also face Northern Ontario's cultural and creative industries: limited recognition, support, access to training, networking opportunities, gender disparities and data constraints.",
+      "Dr. Jude Ortiz of NORDIK served as an international adviser, joining roundtables, reviewing reports and presenting at conferences. Dr. Nancy Duxbury is identified with the University of Coimbra."
+    ],
+    "impact": "The work offers ideas for supporting non-urban cultural communities. The poster does not quantify final economic impact.",
+    "metrics": [],
+    "status": "Four-year project; international advisory contribution",
+    "team": [
+      "Dr. Jude Ortiz",
+      "Dr. Nancy Duxbury"
+    ],
+    "partners": [
+      "University of Coimbra",
+      "Algoma University"
+    ],
+    "externalLinks": [
+      {
+        "title": "Explore IN SITU",
+        "url": "https://insituculture.eu"
+      }
+    ],
+    "pdfSource": "InSITU 26 pstr ART.pdf",
+    "sensitive": false,
+    "related": [
+      "volt-libraries",
+      "csaa-ongoing-support",
+      "water-quality-monitoring"
+    ],
+    "sourceNote": "The supplied PDF text layer is garbled; the summary follows the visible poster. Dr. Jude Ortiz is identified as NORDIK's international adviser. Dr. Nancy Duxbury is identified with the University of Coimbra, Portugal. The poster describes a four-year project in the past tense."
+  }
+]
