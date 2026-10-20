@@ -21,7 +21,8 @@
     "findings": [
       "The poster reports analysis of 2,052 radar scenes across 57 experiments.",
       "Overall experimental results: macro Dice 0.635, precision 0.636, and recall 0.827.",
-      "Examples show that prediction quality varies across the night and across radar scenes."
+      "On one illustrated night, Dice scores at 04:30, 05:00, 06:00, 07:00, 08:30 and 11:00 were 0.700, 0.734, 0.789, 0.822, 0.698 and 0.431.",
+      "The poster states that those night-time scores are exact 480 by 480 pack values, with no spatial smoothing, and that vertical effects in the figure are for display only."
     ],
     "impact": "The research explores a potential new way to study migrating pests and support forest-health monitoring. Field deployment or operational early-warning performance is not claimed.",
     "metrics": [
@@ -56,7 +57,7 @@
       "data-north",
       "canadian-financial-stress-index"
     ],
-    "sourceNote": "Figures and team names transcribed from the single-page poster image.",
+    "sourceNote": "The supplied PDF has no text layer. Figures, the night-time Dice sequence and team names were transcribed from the poster image. Field deployment is not claimed.",
     "categoryName": "AI, Data & Digital Innovation"
   },
   {
@@ -71,16 +72,16 @@
       "Northern Ontario",
       "Evidence-based planning"
     ],
-    "intro": "Good local decisions need trustworthy local evidence. DATA NORTH brings community indicators and historical information together in a public-facing platform, with a conversational AI assistant designed to help people interpret what the data shows.",
+    "intro": "Good local decisions need trustworthy local evidence. DATA NORTH brings socio-economic, health, housing and environmental indicators together for Northern Ontario communities, with a conversational assistant, NIA, meant to help people interpret what the data shows.",
     "question": "How can Northern Ontario communities better discover and understand local data?",
     "methods": [
-      "Organize indicators across multiple categories and Northern Ontario communities.",
-      "Make historical information available for exploring trends.",
-      "Provide data exploration with conversational, source-aware assistance."
+      "Organize indicators across socio-economic, health, housing and environmental categories.",
+      "Offer filters, community selectors, historical trends and data-download links.",
+      "Provide a conversational assistant, NIA, described on the poster as giving source-aware guidance."
     ],
     "findings": [
-      "The poster presents a live NIA AI assistant and a data-exploration platform.",
-      "The project identifies expanding community coverage as its next step."
+      "The poster presents NIA as a live assistant and DATA NORTH as a platform already in use.",
+      "The stated next step is coverage of more communities. That expansion is planned, not described as complete."
     ],
     "impact": "Designed to support community development, research and evidence-based planning by making local information easier to discover.",
     "metrics": [],
@@ -113,7 +114,7 @@
       "counting-every-voice",
       "newcomer-skills"
     ],
-    "sourceNote": "The AI assistant is described as live in the poster; its capabilities have not been independently evaluated by this exhibition.",
+    "sourceNote": "The assistant is described as live on the poster; this exhibition has not independently evaluated it. A small interface mockup on the poster contains unclear wording and is not treated as a product claim.",
     "categoryName": "AI, Data & Digital Innovation"
   },
   {
@@ -137,9 +138,11 @@
     ],
     "findings": [
       "From 2021 to 2026, more than 200 volunteers monitored 46 sites and collected more than 45,000 data points over 465 visits.",
-      "More than 10,000 people were reached through more than 40 public events.",
-      "Sixty-seven youth were mentored, trained or hired, including 52 Indigenous youth interns and hires and 15 post-secondary placements.",
-      "Eight communities benefited from pilot programming; four now independently manage expanded permanent programs."
+      "More than 10,000 people were reached through more than 40 public events, and the poster reports more than 75,000 social media impressions.",
+      "Sixty-seven youth were mentored, trained or hired: 52 Indigenous youth interns and hires from 15 First Nations across Canada, and 15 post-secondary placements.",
+      "Eight communities benefited from pilot programming; four now independently manage expanded permanent programs.",
+      "Two public campaigns, on microplastics and road salts in the St. Marys River, are reported as completed.",
+      "Two community-driven projects on nutrients and E. coli, in the lower Lake Superior watershed and on Lake Huron's North Shore, are reported as started, with completion planned by March 2027."
     ],
     "impact": "The reported achievements show community participation, monitoring capacity and youth training; environmental changes in water quality are not quantified in this poster.",
     "metrics": [
@@ -158,6 +161,10 @@
       [
         "67",
         "youth involved"
+      ],
+      [
+        "75k+",
+        "social impressions"
       ]
     ],
     "status": "Five-year achievements, 2021–2026",
@@ -174,36 +181,51 @@
       "data-north",
       "in-situ"
     ],
-    "sourceNote": "Individual authors are not separately identified on the supplied poster.",
-    "categoryName": "Environment, Water & Sustainability"
+    "sourceNote": "Individual authors are not separately identified on the supplied poster. Partner names are taken from the logos printed on the poster. Achievement counts are for this project from 2021 to 2026, not institute-wide annual totals.",
+    "categoryName": "Water & Environment"
   },
   {
     "slug": "canadian-financial-stress-index",
     "title": "From News to Financial Stress: A High-Frequency Canadian Index",
     "shortTitle": "What can the news tell us about financial stress?",
     "subtitle": "Building a timely Canadian financial indicator from news narratives.",
-    "category": "economics",
+    "category": "finance",
     "tags": [
-      "Financial economics",
+      "Finance",
+      "Financial stress",
       "Natural language processing",
-      "AI",
       "Canada"
     ],
-    "intro": "Traditional measures of financial stress often focus on markets and institutions. This research analyzes financial narratives from major Canadian news outlets on X to develop an additional high-frequency indicator of stress expressed in news coverage.",
+    "intro": "Canada's usual financial-stress measures lean on markets and institutions. This project builds a daily Financial Stress Index from posts by five national news outlets on X, so news narratives can be read alongside those established measures.",
     "question": "Can patterns in Canadian financial news provide a timely signal of financial stress?",
     "methods": [
-      "Collect posts from major Canadian news outlets on X.",
-      "Preprocess text and identify financial-stress vocabulary.",
-      "Apply multiple financial sentiment models and aggregate a Financial Stress Index.",
-      "Compare the proposed index with established financial-stress measures."
+      "Collect 649,804 posts from five Canadian national news outlets on X, from January 2017 to December 2024, using Apify workflows and web scraping, and remove duplicate posts.",
+      "The poster gives the source mix as CTV News 274,692 posts (42.27%), National Post 152,952 (23.54%), Global News 130,030 (20.01%), CBC News 81,721 (12.58%) and The Canadian Press 10,409 (1.60%).",
+      "Preprocess the text, expand a financial dictionary, and keep posts according to their similarity with that vocabulary.",
+      "Score sentiment with FinBERT2019, FinBERT2020, FinVADER and the Loughran-McDonald dictionary, then aggregate a daily index using Dawid-Skene.",
+      "Compare the proposed index with the benchmarks the poster names as EPU, CFSI and VIX."
     ],
     "findings": [
-      "The poster reports alignment with established financial-stress measures.",
-      "It reports early-warning potential and sensitivity to major Canadian financial events.",
-      "It notes stronger relationships during high-stress periods."
+      "The poster reports that the index aligns with established financial-stress measures.",
+      "It reports early-warning signals and sensitivity to major Canadian financial events.",
+      "It reports that relationships with the comparison measures are stronger during high-stress periods.",
+      "The chart is annotated with COVID-19, monetary tightening and tariff uncertainty. Those labels are the poster's own annotations."
     ],
-    "impact": "The proposed index could complement traditional measurements; additional validation is planned before any wider application.",
-    "metrics": [],
+    "impact": "The proposed index could complement traditional measurements. The poster lists further validation, data expansion and integration with DATA NORTH as next steps, not as completed work.",
+    "metrics": [
+      [
+        "649,804",
+        "news posts on X"
+      ],
+      [
+        "2017-24",
+        "study window"
+      ],
+      [
+        "5",
+        "national news outlets"
+      ]
+    ],
     "status": "Presented at CEA 2026; manuscript in preparation",
     "team": [
       "Dr. Zamilur Rahman",
@@ -221,8 +243,8 @@
       "spruce-budworm-radar",
       "volt-libraries"
     ],
-    "sourceNote": "Integration with DATA NORTH is described as planned, not completed.",
-    "categoryName": "Economics, Finance & Social Value"
+    "sourceNote": "Outlet counts and shares are transcribed from the poster and sum to the stated corpus. This exhibition has not independently validated the index. Integration with DATA NORTH is described as planned, not completed.",
+    "categoryName": "Finance"
   },
   {
     "slug": "volt-libraries",
@@ -231,13 +253,13 @@
     "subtitle": "Measuring libraries' social return across communities in Ontario.",
     "category": "economics",
     "tags": [
+      "Education",
       "Libraries",
       "Social return on investment",
-      "Education",
-      "Civic engagement",
-      "Community value"
+      "Economics",
+      "Civic engagement"
     ],
-    "intro": "Libraries are more than books. NORDIK Institute and Ontario Library Service developed a common Social Return on Investment framework to help public libraries describe and measure their contributions to community life.",
+    "intro": "Libraries are more than books. NORDIK Institute and Ontario Library Service developed a common Social Return on Investment framework so public libraries can describe their value, starting with education and reaching across culture, inclusion, leisure, economic development, civic engagement and space.",
     "question": "How can Ontario's public libraries communicate the breadth of their social and economic value?",
     "methods": [
       "Develop a shared Social Return on Investment framework based on engagement across Ontario.",
@@ -285,7 +307,7 @@
       "data-north"
     ],
     "sourceNote": "Usage is reported qualitatively; no exact number of libraries is given.",
-    "categoryName": "Economics, Finance & Social Value"
+    "categoryName": "Economics, Education & Social Value"
   },
   {
     "slug": "newcomer-skills",
@@ -302,9 +324,10 @@
     "intro": "Northern Ontario faces workforce shortages even as newcomers bring education, qualifications and experience. This project aims to understand the gap between newcomer skills and employer needs, and to support more effective workforce strategies.",
     "question": "What prevents newcomer skills from being recognized and matched with local employment?",
     "methods": [
-      "Conduct the Sault Newcomer Survey 2026.",
-      "Engage employers and job developers.",
-      "Document newcomer skills, qualifications and employment challenges."
+      "Conduct the Sault Newcomer Survey 2026. The poster addresses people who moved to Sault Ste. Marie after September 2021.",
+      "Hold partner, employer and job-developer engagement sessions.",
+      "Document newcomer education, skills, qualifications, employment experience and barriers to work.",
+      "A skills-based dashboard and coordinated workforce strategies are described as work the project will do."
     ],
     "findings": [
       "The poster outlines an ongoing survey and engagement programme rather than final outcome estimates.",
@@ -325,8 +348,11 @@
       "Sault Community Career Centre",
       "City of Sault Ste. Marie",
       "Sault College",
+      "Community Builders",
+      "Sault Ste. Marie and Area Local Immigration Partnership",
       "Superior Adult Learning",
-      "Northland Adult Learning Centre"
+      "Northland Adult Learning Centre",
+      "Government of Ontario"
     ],
     "externalLinks": [],
     "pdfSource": "Poster 1 ROD_revised.pdf",
@@ -337,7 +363,7 @@
       "adhd-workplace"
     ],
     "sourceNote": "The poster prints nordiksurvey.ca; it is not made a live recruitment CTA until survey status is confirmed.",
-    "categoryName": "Workforce, Immigration & Inclusion"
+    "categoryName": "Workforce & Immigration"
   },
   {
     "slug": "counting-every-voice",
@@ -389,8 +415,8 @@
       "data-north",
       "volt-libraries"
     ],
-    "sourceNote": "Editorial QA: original poster says 39/64 (58%), mathematically ~61%. Do not silently alter original PDF; obtain author clarification.",
-    "categoryName": "Workforce, Immigration & Inclusion"
+    "sourceNote": "Editorial QA: the poster says 39 of 64 comparison points (58%). The fraction 39/64 is about 61%, not 58%. Do not silently alter the original PDF; obtain author clarification. The about text says 33 reports were reviewed. The PRISMA figure labels the final synthesis list as n=32, after a separate targeted search of n=1. Do not treat 33, 32 and 18 of 23 as the same denominator.",
+    "categoryName": "Workforce & Immigration"
   },
   {
     "slug": "adhd-workplace",
@@ -407,14 +433,15 @@
     "intro": "Research on the economic burden of ADHD has grown, but practical workplace support for adults remains an important gap. This project combines a review of the scientific literature with the development of a workplace-oriented support tool.",
     "question": "What does research on ADHD's economic burden overlook, and how might workplace support address practical needs?",
     "methods": [
-      "Conduct bibliometric and thematic analysis of literature on the economic burden of ADHD.",
-      "Explore themes and geographical patterns of research activity.",
+      "Conduct bibliometric and thematic analysis of literature on the economic burden of ADHD, published as an article in the Journal of Public Health in 2026.",
+      "The poster's production chart covers 2001 to 2025 and maps themes in the literature.",
       "Develop a workplace-support prototype and review it with employers who employ people with ADHD."
     ],
     "findings": [
-      "A related bibliometric analysis was published in the Journal of Public Health in 2026.",
-      "The poster reports that research remains geographically concentrated and more focused on childhood than adult ADHD.",
-      "A workplace app prototype is under employer review; proposed tools include task breakdowns, priority planning and coping prompts."
+      "A related bibliometric analysis was published in the Journal of Public Health in 2026. The poster titles it Economic burden of attention-deficit/hyperactivity disorder: a bibliometric and thematic analysis.",
+      "The poster reports that the literature remains geographically concentrated and more focused on childhood than adult ADHD.",
+      "Its country chart shows affiliation shares of 37.9% for the USA, 9.4% for Spain, 7.6% for England, 5.5% for Canada and 5.1% for the Netherlands.",
+      "A workplace app prototype is under employer review. Proposed tools include task breakdowns, priority or recency planning, guidance after mistakes, and structured coping prompts."
     ],
     "impact": "The intended benefit is more practical support for adults with ADHD at work. The poster does not establish clinical efficacy or effectiveness of the prototype.",
     "metrics": [],
@@ -436,7 +463,7 @@
       "newcomer-skills",
       "data-north"
     ],
-    "sourceNote": "The app's proposed panic-button/expert connection is not a live medical or emergency service.",
+    "sourceNote": "The proposed panic button, described as a way to connect a user with an expert, is under development. It is not a live medical or emergency service. Country shares are transcribed from the poster's chart.",
     "categoryName": "Health & Wellbeing"
   },
   {
@@ -451,7 +478,7 @@
       "Labour economics",
       "Canada"
     ],
-    "intro": "Rural communities face longstanding physician shortages. This research examines whether Saskatchewan's Rural Physician Incentive Program changed the distribution of family physicians across rural and urban areas.",
+    "intro": "In Canada, rural and remote communities account for about 18% of the population and are served by about 8% of physicians. This research asks whether Saskatchewan's Rural Physician Incentive Program changed the rural-urban distribution of family physicians.",
     "question": "Can direct financial payments narrow the rural–urban physician supply gap?",
     "methods": [
       "Use Saskatchewan's Rural Physician Incentive Program as a natural experiment.",
@@ -460,14 +487,23 @@
     ],
     "findings": [
       "Rural physician rates remained persistently below urban rates.",
-      "The study found no statistically robust evidence that the incentive program narrowed the rural–urban physician supply gap.",
-      "The authors suggest financial payments alone may be insufficient without addressing underlying structural barriers."
+      "The study found no statistically robust evidence that the incentive program narrowed the rural-urban physician supply gap.",
+      "The authors suggest financial payments alone may be insufficient where structural barriers remain, including professional isolation, family employment, infrastructure and rural practice support.",
+      "The charts compare physician rates in mixed Saskatchewan regions and the rural-urban gap in Saskatchewan and Manitoba, with 2013 marked as the policy introduction. The written findings do not claim that the program closed the gap."
     ],
     "impact": "The findings inform policy conversations about physician recruitment and rural service access, without demonstrating that a specific alternative intervention would succeed.",
     "metrics": [
       [
-        "2009–21",
-        "analysis period"
+        "18%",
+        "of Canada's population in rural and remote areas"
+      ],
+      [
+        "8%",
+        "of physicians serving those areas"
+      ],
+      [
+        "2009-21",
+        "Saskatchewan analysis period"
       ]
     ],
     "status": "Article presented as published in Social Science & Medicine (2026)",
@@ -485,7 +521,7 @@
       "newcomer-skills",
       "counting-every-voice"
     ],
-    "sourceNote": "Publication title on poster: Do Financial Incentives Affect Rural Physician Supply? Empirical Evidence from a Canadian Experiment. No article URL provided as text.",
+    "sourceNote": "The 18% and 8% figures are the poster's description of the national imbalance, not a result of the Saskatchewan experiment. Publication title on the poster: Do Financial Incentives Affect Rural Physician Supply? Empirical Evidence from a Canadian Experiment. No article URL is printed as text. The poster contains a few typographical slips; the summary uses the intended wording of its findings.",
     "categoryName": "Health & Wellbeing"
   },
   {
@@ -500,7 +536,7 @@
       "Survivor support",
       "Cultural learning"
     ],
-    "intro": "The Mino Bimaadiziwin initiative supports Survivors and families from communities affected by the Shingwauk Indian Residential School. Its work emphasizes culturally centred services, community partnerships and care directed by Indigenous knowledge and priorities.",
+    "intro": "Mino Bimaadiziwin, funded by the Ontario Ministry of Indigenous Affairs and First Nations Economic Reconciliation, supports Survivors and families from the 85 communities affected by the Shingwauk Indian Residential School. The work builds a network of health authorities, Knowledge Keepers and Elders for Indigenous-led, culturally centred programs.",
     "question": "How can Indigenous-led support networks respond to the continuing impacts of Residential Schools?",
     "methods": [
       "Build relationships with health authorities, Knowledge Keepers and Elders.",
@@ -508,8 +544,10 @@
       "Develop a data-management initiative intended to share approved documents and resources."
     ],
     "findings": [
-      "The poster documents 2025 trauma training, community participation and a Kairos Blanket Exercise.",
-      "It describes the planned public launch of a resource dashboard as part of a project expected to conclude in spring 2027."
+      "On 15 and 16 August 2025 the team hosted Bigman Geophysical with members of Garden River, Chapleau Ojibway and Sagamok First Nation, staff from Algoma University and NORDIK, and Elders Harvey and Delores Trudeau.",
+      "On 9 and 10 September 2025 the team held trauma training led by Dr. Kathy Absolon. On 16 September 2025, CSAA and the team hosted a Kairos Blanket Exercise with Phil Jones.",
+      "George Diamond, Chair of CSAA, and Tara Burrell, Project Lead, presented at the National Site Search Forum from 24 to 26 March. In November and December 2025, Survivor and Elder Harvey and Delores Trudeau of Sagamok First Nation provided translation for a site-search update.",
+      "The poster describes a public launch of a resource dashboard as the final phase of a project planned to conclude in spring 2027. The launch is underway as outreach, not described as already complete."
     ],
     "impact": "The project centres survivor and family wellbeing. Participation in activities is documented, while long-term health outcomes are not quantified in this poster.",
     "metrics": [],
@@ -518,19 +556,29 @@
     "contributors": [
       {
         "name": "George Diamond",
-        "role": "CSAA Chair, named as a forum presenter"
+        "role": "CSAA Chair, named as a National Site Search Forum presenter"
       },
       {
         "name": "Tara Burrell",
-        "role": "Project Lead, named as a forum presenter"
+        "role": "Project Lead, named as a National Site Search Forum presenter"
       },
       {
         "name": "Elders Harvey and Delores Trudeau",
-        "role": "Named for contributions to project activities"
+        "role": "Named as visiting Elders and as translators of a site-search update; Sagamok First Nation"
+      },
+      {
+        "name": "Dr. Kathy Absolon",
+        "role": "Named as leading the September 2025 trauma training"
+      },
+      {
+        "name": "Phil Jones",
+        "role": "Named as facilitating the Kairos Blanket Exercise on 16 September 2025"
       }
     ],
     "partners": [
-      "Children of Shingwauk Alumni Association"
+      "Children of Shingwauk Alumni Association",
+      "Ontario Ministry of Indigenous Affairs and First Nations Economic Reconciliation",
+      "Crown-Indigenous Relations and Northern Affairs Canada"
     ],
     "externalLinks": [],
     "pdfSource": "CST - Ongoing Support for CSAA_revised.pdf",
@@ -540,8 +588,8 @@
       "in-situ",
       "water-quality-monitoring"
     ],
-    "sourceNote": "Community-specific publishing approval needed; dashboard public launch is planned, not verified live.",
-    "categoryName": "Indigenous Research, Truth & Community Wellness"
+    "sourceNote": "Community-specific publishing approval is still the right standard for public reuse of this story. People named for a session are contributors in the poster, not an inferred author list. The dashboard public launch is planned. The poster text contains typographical slips that this summary does not repeat.",
+    "categoryName": "Indigenous Research & Community Wellness"
   },
   {
     "slug": "csaa-unmarked-burials",
@@ -563,8 +611,10 @@
       "Develop a cloud-based Shingwauk Database with specialist programming and data-stewardship practices."
     ],
     "findings": [
-      "The poster describes the co-development of the Shingwauk Database and historical records research conducted since 2021.",
-      "The poster shows a secure sign-in to the database; access to records is not represented as public or unrestricted."
+      "The poster describes the co-development of the Shingwauk Database by CSAA, NORDIK's Community Support Team and the Office of the Chief Coroner of Ontario's Residential School Death Investigation Team.",
+      "Since 2021, that investigation team has worked through thousands of archived records related to deaths at Indian Residential Schools in Ontario. NORDIK staff built the cloud database and its stewardship tools.",
+      "The poster documents Survivors and families at the former Shingwauk site during the Life After Residential School gathering in August 2025.",
+      "The poster shows a secure sign-in to the database. Access to records is not represented as public or unrestricted."
     ],
     "impact": "The project aims to improve appropriately governed access to records and support community-led truth-telling. Sensitive data remain protected.",
     "metrics": [],
@@ -572,7 +622,8 @@
     "team": [],
     "partners": [
       "Children of Shingwauk Alumni Association",
-      "Office of the Chief Coroner of Ontario — Residential School Death Investigation Team"
+      "Office of the Chief Coroner of Ontario — Residential School Death Investigation Team",
+      "Crown-Indigenous Relations and Northern Affairs Canada"
     ],
     "externalLinks": [],
     "pdfSource": "CST - Unmarked Burials.pdf",
@@ -582,8 +633,8 @@
       "data-north",
       "in-situ"
     ],
-    "sourceNote": "Publication and image permissions should be confirmed with CSAA. Never link to or expose protected database contents.",
-    "categoryName": "Indigenous Research, Truth & Community Wellness"
+    "sourceNote": "Publication and image permissions should be confirmed with CSAA. Do not link to or expose protected database contents. Logo organizations are named as printed; a logo is not treated as a personal credit.",
+    "categoryName": "Indigenous Research & Community Wellness"
   },
   {
     "slug": "in-situ",
@@ -605,8 +656,9 @@
       "Contribute international advice, roundtables, report reviews and conference presentations."
     ],
     "findings": [
-      "The project connects cultural and creative activity with identity, belonging, learning, tourism and economic diversification.",
-      "The poster identifies obstacles such as limited recognition, support and access to training, and notes similarities to Northern Ontario."
+      "The project connects cultural and creative activity with identity, belonging, learning, enjoyment, tourism, economic diversification and regeneration.",
+      "The poster identifies obstacles that also face Northern Ontario's cultural and creative industries: limited recognition, support, access to training, networking opportunities, gender disparities and data constraints.",
+      "Dr. Jude Ortiz of NORDIK served as an international adviser, joining roundtables, reviewing reports and presenting at conferences. Dr. Nancy Duxbury is identified with the University of Coimbra."
     ],
     "impact": "The work offers ideas for supporting non-urban cultural communities. The poster does not quantify final economic impact.",
     "metrics": [],
@@ -632,7 +684,7 @@
       "csaa-ongoing-support",
       "water-quality-monitoring"
     ],
-    "sourceNote": "Dr. Jude Ortiz is identified as NORDIK's International Advisor; Dr. Nancy Duxbury is identified with University of Coimbra.",
-    "categoryName": "Arts, Culture & Community Resilience"
+    "sourceNote": "The supplied PDF text layer is garbled; the summary follows the visible poster. Dr. Jude Ortiz is identified as NORDIK's international adviser. Dr. Nancy Duxbury is identified with the University of Coimbra, Portugal. The poster describes a four-year project in the past tense.",
+    "categoryName": "Arts, Culture & Place"
   }
 ]

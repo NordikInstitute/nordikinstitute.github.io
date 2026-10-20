@@ -1,0 +1,168 @@
+{
+  "spruce-budworm-radar": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Jennie Pearce",
+      "Dr. Jean-Noel Candau",
+      "Dr. Elaine Ho-Tassoni",
+      "Eyad Gad"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "data-north": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Dr. Zamilur Rahman",
+      "Dr. Teryn Bruni",
+      "Dr. Muhammad Azam",
+      "Md Soaib Hossain",
+      "Nazmul Hossen",
+      "Mushfika Latif",
+      "Quazi Nazmus Sakib",
+      "Nitin Bhatti"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "water-quality-monitoring": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. The water quality poster does not list individual authors or researchers; reviewer identity and approval date were not supplied."
+  },
+  "canadian-financial-stress-index": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Zamilur Rahman",
+      "Dr. Ahmed Aziz",
+      "Dr. Tamanna Rimi",
+      "Eyad Gad",
+      "Md. Soaib Hossain"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "volt-libraries": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Tamanna Rimi",
+      "Dr. Sean Meades",
+      "Dr. Jude Ortiz",
+      "Harsh Morye",
+      "Mayesha Verma"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "newcomer-skills": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Dr. Zamilur Rahman",
+      "Quazi Nazmus Sakib",
+      "Nazmul Hossen"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "counting-every-voice": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Ahmed Aziz",
+      "Dr. Tamanna Rimi",
+      "Quazi Nazmus Sakib"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "adhd-workplace": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ajmery Sultana",
+      "Dr. Ahmed Aziz",
+      "Quazi Nazmus Sakib",
+      "Mushfika Binta Latif",
+      "Umer Khan"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "rural-physician-recruitment": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Tamanna Rimi",
+      "Dr. Ahmed Aziz",
+      "Quazi Nazmus Sakib"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  },
+  "csaa-ongoing-support": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Poster provides no named author list; people listed as contributors are not automatically the approving reviewers. CSAA partner sign-off remains unconfirmed.",
+    "namedProjectContributors": [
+      {
+        "name": "George Diamond",
+        "role": "Chair of CSAA; named as a forum presenter"
+      },
+      {
+        "name": "Tara Burrell",
+        "role": "Project Lead; named as a forum presenter"
+      },
+      {
+        "name": "Harvey Trudeau",
+        "role": "Elder; named in project activities"
+      },
+      {
+        "name": "Delores Trudeau",
+        "role": "Elder; named in project activities"
+      }
+    ]
+  },
+  "csaa-unmarked-burials": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. No author/research-team names are provided on the poster. CSAA partner sign-off remains unconfirmed; public release remains on hold."
+  },
+  "in-situ": {
+    "posterAndContentApproved": true,
+    "communityPartnerApproved": true,
+    "posterListedResearchTeam": [
+      "Dr. Jude Ortiz",
+      "Dr. Nancy Duxbury"
+    ],
+    "reviewer": "",
+    "reviewedAt": "",
+    "notes": "Organizer-reported author approval. Research-team names transcribed from the supplied poster; these names do not establish which individuals personally provided sign-off. Reviewer identity and approval date were not supplied."
+  }
+}

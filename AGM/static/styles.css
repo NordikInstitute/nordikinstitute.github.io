@@ -21,5 +21,40 @@
 @media(max-width:380px){.hero-cta .button{width:100%}.poster-wall{columns:1}.theme-editorial{grid-template-columns:32px 1fr 85px}.theme-editorial-content h2{font-size:19px}.impact-metric-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media print{.announcement,.site-header,.footer,.qr-screen-note,button{display:none!important}.qr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:5mm}.qr-card{border:1px solid #ddd;page-break-inside:avoid;break-inside:avoid;width:100%;padding:12px}.qr-card img{width:35mm}.qr-card h2{font-size:17px}.qr-card p{font-size:8px}@page{size:A4;margin:8mm}}
+.hall{background:#102c35;color:#f4f7f4;border-radius:18px;padding:22px 22px 16px;margin-bottom:42px}
+.hall-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:22px;align-items:stretch}
+.hall-stage{background:#0c242c;border-radius:14px;padding:14px;display:flex;flex-direction:column;min-width:0}
+.hall-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.hall-toolbar p{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#f0d7a4}
+.hall-toolbar button{background:transparent;color:#f6e7c8;border:1px solid #3d6466;border-radius:8px;padding:8px 12px;font-weight:800;font-size:12px}
+.hall-toolbar button:hover{background:#173e44}
+.hall-frame{flex:1;display:flex;align-items:center;justify-content:center;background:
+radial-gradient(circle at 50% 40%,rgba(237,187,102,.16),transparent 42%),#08181d;border-radius:10px;min-height:460px;overflow:hidden;padding:16px}
+.hall-frame img{max-height:68vh;width:auto;max-width:100%;object-fit:contain;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.hall-panel{background:#f7f4ee;color:#1d3338;border-radius:14px;padding:26px 26px 22px;display:flex;flex-direction:column;min-width:0}
+.hall-panel h2{font-size:clamp(1.7rem,2.4vw,2.5rem);margin:8px 0 8px}
+.hall-panel #hall-sub{color:#5d7370;margin:0 0 8px}
+.hall-panel blockquote{font-family:var(--serif);font-size:1.2rem;line-height:1.45;border-left:3px solid #d3a65a;margin:8px 0 12px;padding:2px 0 2px 14px;color:#1d494f}
+.hall-findings{margin:0 0 12px;padding-left:18px;color:#3c5856}
+.hall-findings li{margin:7px 0}
+.hall-status{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.04em;color:#6d5340}
+.hall-care{background:#f4eadc;border-left:3px solid #ac814f;padding:10px 12px;font-size:12px;line-height:1.55;margin:0 0 12px}
+.hall-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.hall-actions .button{min-height:44px}
+.hall .chip-row{padding:16px 0 8px}
+.hall .filter-chip{background:#143844;color:#e7f1ee;border-color:#315e62}
+.hall .filter-chip:hover{background:#1c4c52}
+.hall .filter-chip.selected{background:#edbb66;color:#15323a;border-color:#edbb66}
+.hall-strip{position:relative;display:flex;gap:10px;overflow-x:auto;padding:8px 2px 6px;scroll-snap-type:x mandatory}
+.hall-thumb{flex:0 0 86px;border:2px solid transparent;border-radius:8px;padding:3px;background:#0c242c;scroll-snap-align:start}
+.hall-thumb img{display:block;width:100%;height:112px;object-fit:cover;object-position:top;border-radius:5px}
+.hall-thumb[aria-current=true]{border-color:#edbb66}
+.hall-keys{margin:8px 0 0;color:#b7ccc8;font-size:11px}
+.theme-tile.theme-navy{background:#e5edf5}
+.theme-editorial-navy{background:#e4eaf2}
+.category-dot.navy{background:#2c5278}
+.graph-node .node-navy{fill:#2c5278}
+@media(max-width:900px){.hall-layout{grid-template-columns:1fr}.hall-frame{min-height:320px}.hall-frame img{max-height:56vh}}
+@media(max-width:620px){.hall{padding:14px}.hall-toolbar{align-items:stretch}.hall-toolbar button{padding:8px}.hall-actions{flex-direction:column}.hall-actions .button{width:100%}}
 /* Attribute hiding must win over layout display declarations. */
 [hidden]{display:none!important}

@@ -65,4 +65,90 @@
     viewport.addEventListener('wheel',(e)=>{if(!e.ctrlKey)return;e.preventDefault();zoom=Math.max(.5,Math.min(3,zoom+(e.deltaY<0?.1:-.1)));showScale();},{passive:false});
     reader.addEventListener('keydown',(e)=>{if(mode!=='image'||/input|textarea|select/i.test(e.target?.tagName))return;if(e.key==='+'||e.key==='='){e.preventDefault();zoom=Math.min(3,zoom+.25);showScale();}else if(e.key==='-'){e.preventDefault();zoom=Math.max(.5,zoom-.25);showScale();}});
   }
+
+  const hall=document.getElementById('exhibition-hall');
+  const hallDataEl=document.getElementById('hall-data');
+  if(hall&&hallDataEl){
+    const data=JSON.parse(hallDataEl.textContent);
+    const base=document.querySelector('meta[name="site-base-path"]')?.content||'';
+    const image=document.getElementById('hall-image');
+    const count=document.getElementById('hall-count');
+    const kicker=document.getElementById('hall-kicker');
+    const heading=document.getElementById('hall-heading');
+    const sub=document.getElementById('hall-sub');
+    const question=document.getElementById('hall-question');
+    const findings=document.getElementById('hall-findings');
+    const status=document.getElementById('hall-status');
+    const care=document.getElementById('hall-care');
+    const story=document.getElementById('hall-story');
+    const readerLink=document.getElementById('hall-reader');
+    const frameLink=document.getElementById('hall-frame-link');
+    const thumbs=[...hall.querySelectorAll('.hall-thumb')];
+    const chips=[...hall.querySelectorAll('[data-hall-filter]')];
+    const wallItems=[...document.querySelectorAll('#poster-wall .wall-item')];
+    let filter='all';
+    let index=Math.max(0,data.findIndex(p=>p.slug==='water-quality-monitoring'));
+    const params=new URLSearchParams(location.search);
+    const requested=params.get('poster');
+    const theme=params.get('theme');
+    if(theme&&(theme==='all'||data.some(project=>project.category===theme)))filter=theme==='all'?'all':theme;
+    if(requested){const found=data.findIndex(project=>project.slug===requested);if(found>=0)index=found;}
+    const strip=document.getElementById('hall-strip');
+    const visible=()=>data.map((project,i)=>({project,i})).filter(item=>filter==='all'||item.project.category===filter);
+    function show(nextIndex,fromUser){
+      const sequence=visible();
+      if(!sequence.length)return;
+      if(!sequence.some(item=>item.i===nextIndex))nextIndex=sequence[0].i;
+      index=nextIndex;
+      const project=data[index];
+      const place=sequence.findIndex(item=>item.i===index)+1;
+      image.src=`${base}/assets/previews/${project.slug}.webp`;
+      image.alt=`Original research poster for ${project.title}`;
+      count.textContent=filter==='all'?`Poster ${place} of ${data.length}`:`Poster ${place} of ${sequence.length} in this room`;
+      kicker.textContent=project.categoryName;
+      heading.textContent=project.shortTitle;
+      sub.textContent=project.subtitle;
+      question.textContent=project.question;
+      findings.replaceChildren(...project.findings.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+      status.textContent=project.status;
+      care.hidden=!project.sensitive;
+      const projectUrl=`${base}/projects/${project.slug}/`;
+      story.href=projectUrl;
+      readerLink.href=`${projectUrl}poster/`;
+      frameLink.href=readerLink.href;
+      thumbs.forEach(thumb=>{
+        const on=thumb.dataset.hallSlug===project.slug;
+        thumb.setAttribute('aria-current',String(on));
+        thumb.hidden=filter!=='all'&&thumb.dataset.cat!==filter;
+        if(on&&fromUser){
+          const left=thumb.offsetLeft-(strip.scrollLeft||0);
+          if(left<0||left+thumb.offsetWidth>strip.clientWidth)strip.scrollTo({left:Math.max(0,thumb.offsetLeft-12),behavior:'smooth'});
+        }
+      });
+      wallItems.forEach(item=>{item.hidden=filter!=='all'&&item.dataset.cat!==filter;});
+      chips.forEach(chip=>{const on=chip.dataset.hallFilter===filter;chip.classList.toggle('selected',on);chip.setAttribute('aria-pressed',String(on));});
+      if(fromUser&&location.origin!=='null'){
+        const url=new URL(location.href);
+        url.searchParams.set('poster',project.slug);
+        if(filter==='all')url.searchParams.delete('theme');else url.searchParams.set('theme',filter);
+        history.replaceState(null,'',url.pathname+url.search);
+      }
+    }
+    function step(direction){
+      const sequence=visible();
+      const place=sequence.findIndex(item=>item.i===index);
+      const next=sequence[(place+direction+sequence.length)%sequence.length];
+      show(next.i,true);
+    }
+    document.getElementById('hall-prev').addEventListener('click',()=>step(-1));
+    document.getElementById('hall-next').addEventListener('click',()=>step(1));
+    thumbs.forEach(thumb=>thumb.addEventListener('click',()=>show(data.findIndex(project=>project.slug===thumb.dataset.hallSlug),true)));
+    chips.forEach(chip=>chip.addEventListener('click',()=>{filter=chip.dataset.hallFilter;show(index,true);}));
+    hall.addEventListener('keydown',(event)=>{
+      if(/input|textarea|select/i.test(event.target?.tagName))return;
+      if(event.key==='ArrowRight'){event.preventDefault();step(1);}
+      else if(event.key==='ArrowLeft'){event.preventDefault();step(-1);}
+    });
+    show(index,false);
+  }
 })();

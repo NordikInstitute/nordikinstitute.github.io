@@ -7,45 +7,52 @@
     "aqua"
   ],
   [
-    "environment",
-    "Environment, Water & Sustainability",
-    "Supporting community-led stewardship and healthier ecosystems.",
+    "finance",
+    "Finance",
+    "A high-frequency reading of financial stress in Canadian news, set beside established market measures.",
     "02",
-    "forest"
+    "navy"
   ],
   [
     "economics",
-    "Economics, Finance & Social Value",
-    "Research into the value, uncertainty and resources that shape our communities.",
+    "Economics, Education & Social Value",
+    "How public institutions, especially libraries, account for learning, culture and community value.",
     "03",
     "gold"
   ],
   [
-    "workforce",
-    "Workforce, Immigration & Inclusion",
-    "Connecting people, opportunity and evidence for stronger local economies.",
+    "environment",
+    "Water & Environment",
+    "Community-led monitoring and care for waters from Lake Superior to Lake Huron.",
     "04",
+    "forest"
+  ],
+  [
+    "workforce",
+    "Workforce & Immigration",
+    "Connecting newcomer skills, local evidence and opportunity in Northern communities.",
+    "05",
     "coral"
   ],
   [
     "health",
     "Health & Wellbeing",
     "Improving support, access and quality of life through thoughtful research.",
-    "05",
+    "06",
     "berry"
   ],
   [
     "indigenous",
-    "Indigenous Research, Truth & Community Wellness",
+    "Indigenous Research & Community Wellness",
     "Grounded in community leadership, care, truth-telling and respectful stewardship.",
-    "06",
+    "07",
     "clay"
   ],
   [
     "culture",
-    "Arts, Culture & Community Resilience",
-    "The creative connections that help places thrive.",
-    "07",
+    "Arts, Culture & Place",
+    "Creative industries and the cultural ties that help non-urban places thrive.",
+    "08",
     "purple"
   ]
 ]
