@@ -1,74 +1,51 @@
-// Story dialog for one poster: full preview with zoom, the summary, methods,
-// findings, people, partners, links and related stories. Deep-linkable as
-// #story/<slug>. Uses the native <dialog> for focus containment and Esc.
+// Story dialog: one poster, its essentials, and the way to the full material.
+// Deep-linkable as #story/<slug>; native <dialog> handles focus and Esc.
 
-import { esc, ARROW } from './util.js';
+import { esc } from './util.js';
 
 const { gsap } = window;
-const CRISIS_LINE = '1-866-925-4419';
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
 
-function list(items, tag = 'ul') {
-  return items?.length ? `<${tag}>${items.map((x) => `<li>${esc(x)}</li>`).join('')}</${tag}>` : '';
-}
-
-function section(title, body) {
-  return body ? `<section class="story__sec"><h3>${esc(title)}</h3>${body}</section>` : '';
-}
-
-function content(p, map) {
+function content(p) {
   const metrics = p.metrics?.length
-    ? `<div class="story__metrics">${p.metrics.map(([v, l]) => `<div class="story__metric"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`
+    ? `<div class="story__metrics">${p.metrics.map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`
     : '';
   const note = p.sensitive
-    ? `<div class="story__note" role="note"><strong>Content note</strong>This story concerns the Shingwauk Indian Residential School and its continuing impacts. Support is available 24 hours a day through the Indian Residential Schools Crisis Line: <a href="tel:18669254419">${CRISIS_LINE}</a>.</div>`
+    ? `<div class="story__note" role="note"><strong>Content note</strong>This story concerns the Shingwauk Indian Residential School and its continuing impacts. Support is available 24 hours a day through the Indian Residential Schools Crisis Line: <a href="tel:18669254419">1-866-925-4419</a>.</div>`
     : '';
-  const team = p.team?.length ? `<ul class="story__people">${p.team.map((t) => `<li><span>${esc(t)}</span></li>`).join('')}</ul>` : '';
-  const contributors = p.contributors?.length
-    ? `<ul class="story__contrib">${p.contributors.map((c) => `<li><strong>${esc(c.name)}</strong><span>${esc(c.role)}</span></li>`).join('')}</ul>`
-    : '';
-  const partners = p.partners?.length ? `<ul class="story__people">${p.partners.map((t) => `<li><span>${esc(t)}</span></li>`).join('')}</ul>` : '';
-  const links = [
-    // The exhibition's own project page (also the QR-code destination for this poster).
-    `<a class="btn btn--solid" href="projects/${esc(p.slug)}/">Full project page ${ARROW}</a>`,
-    ...(p.externalLinks ?? []).map((l) => `<a class="btn btn--ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)} ${ARROW}</a>`),
-    `<a class="btn btn--ghost" href="${esc(p.pdf)}" target="_blank" rel="noopener" data-pdf-size="${esc(p.pdf)}">Poster PDF ${ARROW}</a>`,
+  const people = [
+    p.team?.length ? `<p><strong>Research team:</strong> ${p.team.map(esc).join(', ')}</p>` : '',
+    p.contributors?.length ? `<p><strong>Named in this story:</strong> ${p.contributors.map((c) => esc(c.name)).join(', ')}</p>` : '',
+    p.partners?.length ? `<p><strong>Partners:</strong> ${p.partners.map(esc).join(', ')}</p>` : '',
   ].join('');
-  const related = (p.related ?? []).map((s) => map[s]).filter(Boolean);
-  const relatedHtml = related.length
-    ? `<div class="related">${related.map((r) => `<button type="button" data-open="${esc(r.slug)}" class="${r.sensitive ? 'is-veiled' : ''}"><img src="${esc(r.thumb)}" alt="" loading="lazy" width="640" height="853"><span>${esc(r.shortTitle)}</span></button>`).join('')}</div>`
-    : '';
-
+  const actions = [
+    `<a class="btn btn--blue" href="projects/${esc(p.slug)}/">Full project page ${ARROW}</a>`,
+    `<a class="btn btn--line" href="${esc(p.pdf)}" target="_blank" rel="noopener" data-pdf>Poster PDF ${ARROW}</a>`,
+    ...(p.externalLinks ?? []).map((l) => `<a class="btn btn--line" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.title)} ${ARROW}</a>`),
+  ].join('');
   return `
-    <p class="story__cat"><span>${p.num} · ${esc(p.categoryLabel)}</span><span class="badge">${esc(p.status)}</span></p>
+    <p class="story__meta">${p.num} · ${esc(p.categoryLabel)} · ${esc(p.status)}</p>
     <h2 class="story__title" id="story-title">${esc(p.shortTitle)}</h2>
-    <p class="story__full">${esc(p.title)}</p>
     <p class="story__subtitle">${esc(p.subtitle)}</p>
     ${note}
     <p class="story__intro">${esc(p.intro)}</p>
-    <div class="story__q"><small>Research question</small><p>${esc(p.question)}</p></div>
+    <p class="story__q">${esc(p.question)}</p>
     ${metrics}
-    ${section('How the work was done', list(p.methods, 'ol'))}
-    ${section('What the poster reports', list(p.findings))}
-    ${section('Why it matters', p.impact ? `<p>${esc(p.impact)}</p>` : '')}
-    ${section('Research team', team)}
-    ${section('Named in this story', contributors)}
-    ${section('Partners', partners)}
-    ${section('Themes', `<ul class="story__people">${(p.tags ?? []).map((t) => `<li><span>${esc(t)}</span></li>`).join('')}</ul>`)}
-    ${section('Links', `<div class="story__links">${links}</div>`)}
-    ${section('Related research', relatedHtml)}
-  `;
+    <section class="story__sec"><h3>What the poster reports</h3><ul>${p.findings.map((f) => `<li>${esc(f)}</li>`).join('')}</ul></section>
+    ${people ? `<section class="story__sec"><h3>People</h3>${people}</section>` : ''}
+    <div class="story__actions">${actions}</div>`;
 }
 
-export function initStory({ projects, map }) {
+export function initStory({ projects }) {
   const dlg = document.getElementById('story');
   const img = document.getElementById('story-img');
   const poster = document.getElementById('story-poster');
   const body = document.getElementById('story-body');
+  const grid = dlg.querySelector('.story__grid');
   const article = document.getElementById('story-content');
   const countEl = document.getElementById('story-count');
   const zoomBtn = document.getElementById('story-zoom');
-  const pdfBtn = document.getElementById('story-pdf');
-  const sizeCache = new Map();
+  const sizes = new Map();
   let current = -1;
   let opener = null;
 
@@ -78,9 +55,7 @@ export function initStory({ projects, map }) {
     zoomBtn.textContent = on ? 'Fit' : 'Zoom';
     if (!on) { img.style.transform = ''; return; }
     const r = poster.getBoundingClientRect();
-    const x = e ? ((e.clientX - r.left) / r.width) * 100 : 50;
-    const y = e ? ((e.clientY - r.top) / r.height) * 100 : 30;
-    img.style.transformOrigin = `${x}% ${y}%`;
+    img.style.transformOrigin = e ? `${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%` : '50% 30%';
     img.style.transform = 'scale(2.4)';
   }
   img.addEventListener('click', (e) => setZoom(!poster.classList.contains('is-zoomed'), e));
@@ -110,40 +85,37 @@ export function initStory({ projects, map }) {
     poster.querySelector('.story__gate')?.remove();
     const g = document.createElement('div');
     g.className = 'story__gate';
-    g.innerHTML = `<p class="eyebrow eyebrow--plain" style="justify-content:center">Content note</p><p>This poster includes community photographs and concerns Residential Schools. View it when you are ready.</p><button class="btn btn--ghost" type="button">Show poster</button>`;
+    g.innerHTML = '<p class="eyebrow">Content note</p><p>This poster includes community photographs and concerns Residential Schools. View it when you are ready.</p><div><button class="btn btn--light" type="button">Show poster</button></div>';
     g.querySelector('button').addEventListener('click', () => { showPoster(p); zoomBtn.focus(); });
     poster.append(g);
   }
 
   async function pdfSize(url) {
-    if (sizeCache.has(url)) return sizeCache.get(url);
+    if (sizes.has(url)) return sizes.get(url);
     try {
       const res = await fetch(url, { method: 'HEAD' });
-      const bytes = Number(res.headers.get('content-length'));
-      const label = bytes ? (bytes > 1e6 ? `${(bytes / 1048576).toFixed(1)} MB` : `${Math.round(bytes / 1024)} KB`) : '';
-      sizeCache.set(url, label);
-      return label;
+      const b = Number(res.headers.get('content-length'));
+      const s = b ? (b > 1e6 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.round(b / 1024)} KB`) : '';
+      sizes.set(url, s);
+      return s;
     } catch { return ''; }
   }
 
-  function render(i, { animate = true } = {}) {
+  function render(i) {
     current = (i + projects.length) % projects.length;
     const p = projects[current];
     countEl.textContent = `${p.num} / ${String(projects.length).padStart(2, '0')}`;
-    article.innerHTML = content(p, map);
-    pdfBtn.href = p.pdf;
-    pdfBtn.textContent = 'Poster PDF';
+    article.innerHTML = content(p);
     pdfSize(p.pdf).then((s) => {
-      if (projects[current] !== p || !s) return;
-      pdfBtn.textContent = `Poster PDF · ${s}`;
-      article.querySelectorAll('[data-pdf-size]').forEach((a) => { a.firstChild.textContent = `Poster PDF (${s}) `; });
+      const a = article.querySelector('[data-pdf]');
+      if (s && a && projects[current] === p) a.firstChild.textContent = `Poster PDF (${s}) `;
     });
     if (p.sensitive) gate(p); else showPoster(p);
     body.scrollTop = 0;
-    dlg.querySelector('.story__grid').scrollTop = 0;
+    grid.scrollTop = 0;
     history.replaceState(null, '', `#story/${p.slug}`);
-    if (animate && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-      gsap.from(article.children, { y: 26, opacity: 0, duration: 0.8, ease: 'expo.out', stagger: 0.035, clearProps: 'transform,opacity' });
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      gsap.from(article.children, { y: 22, opacity: 0, duration: 0.7, ease: 'expo.out', stagger: 0.04, clearProps: 'transform,opacity' });
     }
   }
 
@@ -155,10 +127,10 @@ export function initStory({ projects, map }) {
       dlg.showModal();
       document.documentElement.classList.add('is-locked');
       if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        gsap.fromTo(dlg, { y: 40, opacity: 0, scale: 0.985 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'expo.out', clearProps: 'transform,opacity' });
+        gsap.fromTo(dlg, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: 'expo.out', clearProps: 'transform,opacity' });
       }
     }
-    render(i, { animate: true });
+    render(i);
     document.getElementById('story-close').focus({ preventScroll: true });
   }
 
@@ -171,13 +143,8 @@ export function initStory({ projects, map }) {
   document.getElementById('story-close').addEventListener('click', () => dlg.close());
   document.getElementById('story-prev').addEventListener('click', () => render(current - 1));
   document.getElementById('story-next').addEventListener('click', () => render(current + 1));
-  dlg.addEventListener('click', (e) => {
-    if (e.target === dlg) dlg.close(); // backdrop
-    const rel = e.target.closest('[data-open]');
-    if (rel && dlg.contains(rel)) { e.preventDefault(); open(rel.dataset.open); }
-  });
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener('keydown', (e) => {
-    if (e.target.closest('input, textarea')) return;
     if (e.key === 'ArrowRight') { e.preventDefault(); render(current + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); render(current - 1); }
   });

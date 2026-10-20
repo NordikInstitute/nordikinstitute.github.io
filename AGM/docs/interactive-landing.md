@@ -1,10 +1,10 @@
 # NORDIK Institute — Annual General Meeting page (2025–2026)
 
-A single interactive page presenting the twelve AGM research posters, the 2025–2026 report by the numbers, and the people and partners behind the work. Static files only: there is no build step and no backend.
+A single interactive page built around the NORDIK brand. The Great Lakes emblem is rendered as a 3D point cloud, and the twelve AGM research posters orbit it. Each poster is linked by a line to Sault Ste. Marie, where NORDIK is based. Static files only: there is no build step.
 
 ## Run it
 
-The page uses ES modules and loads `assets/projects.json`, so it has to be served over HTTP. Opening `index.html` directly from disk shows a notice instead.
+The page uses ES modules and loads `assets/projects.json`, so it must be served over HTTP:
 
 ```bash
 # from the repository root (the folder that contains AGM/)
@@ -12,87 +12,76 @@ python -m http.server 8000
 # then open http://localhost:8000/AGM/
 ```
 
-Any static server works, for example `npx serve .` (then open `/AGM/`).
+Fonts and GSAP are vendored, so the page works offline when served from a laptop.
 
-**GitHub Pages:** push the repository. The page is served at `https://<user>.github.io/AGM/`. All paths are relative and every dependency is vendored, so nothing else is needed.
+## The experience
 
-**At the venue:** everything, including fonts and GSAP, is local. Serving the folder from a laptop works with no internet connection. For a full-screen display, use the browser's kiosk or full-screen mode.
-
-## What's on the page
-
-| Section | Behaviour |
+| Part | Behaviour |
 |---|---|
-| Intro | Counts the 12 posters as they load, then wipes away. Once per browser session; skippable with Esc, Enter, Space or the button. |
-| Hero | WebGL wordmark built from tiles cut from the posters. The pointer parts the tiles; scrolling blows them away. A static 2D version is used without WebGL. |
-| 01 Welcome | Statement whose words light up as you scroll, plus a research-theme marquee (with a pause button). |
-| 02 Numbers | Executive-summary figures: count-ups, the four strategic goals with "n of 22 projects" bars, team figures, and the PDF. |
-| 03 Research | Pinned shelf of all 12 posters (a swipe rail on phones). Theme chips highlight matching stories. Each card opens a story dialog. |
-| 04 Evidence | Ten figures quoted from the posters. Each opens its story. |
-| 05 People | Researchers named on the posters. Hovering a name shows their posters; the project chips open stories. Partner marquee. |
-| 06 Thanks | Interactive dot field ("click or tap to send a ripple"), links, and a footer revealed underneath. |
+| Hook (first visit, and again once 5 minutes have passed since it was last shown) | The official NORDIK logo appears on paper; CSS paints it from the first frame, so nothing half-built shows while the scripts load. Its emblem dissolves into points as the lights go down. The lettering glides to the top-left, and "Annual General Meeting · 2025–2026" then glows in beneath it. The points regather into a large point-cloud emblem, and the posters arrive in orbit. It plays at half speed, about 8 s. Skip with Esc, Enter, a scroll or the "Skip intro" button. Visits within 5 minutes of it open with a quick gather; the time is kept in `localStorage` as `agm-hook-shown-at`. |
+| Hero | The cloud tilts toward the pointer and parts around it; ring, lakes and pictograph sit at different depths. Hovering a poster point previews it and lights its line to Sault Ste. Marie; selecting it opens the story. Scrolling away streams the points past the viewer. |
+| Research | One shelf of the twelve posters. It pins and scrolls sideways on wide screens, and is a swipe rail on phones. Each card opens its story. |
+| The year | Four figures from the 2025–2026 executive summary, plus the PDF. |
+| Close | Thanks, NORDIK links, and links to the exhibition pages. |
+| Story dialog | Poster with zoom, summary, research question, headline figures, findings, people, and links to the full project page and the PDF. Deep-link with `#story/<slug>`. ← and → move between stories; Esc closes. |
 
-**Deep links:** `#story/<slug>` opens a story directly, for example `/AGM/#story/data-north`. In a story, ← and → move between posters and Esc closes it.
+The two Residential Schools posters (CSAA) appear as neutral markers in the orbit rather than thumbnails. They are veiled on the shelf and open behind a content note that includes the Indian Residential Schools Crisis Line.
+
+`prefers-reduced-motion: reduce` turns off the hook, the pinned shelf and all scroll-driven motion. The cloud is drawn once, assembled and still. Without WebGL, the static emblem is shown and the poster points still work.
+
+## Brand assets (`assets/brand/`)
+
+- **`great-lakes-emblem.svg`:** the supplied emblem. It is sampled into points and used as the favicon and nav mark.
+- **`nordik-logo.svg`:** the supplied full logo.
+- **`nordik-wordmark.svg`:** the lettering and tagline only, split from the full logo. It is a `<symbol>` whose colours come from the CSS variables `--wm-main` and `--wm-accent`, so the same file renders brand-blue on paper and white on night.
 
 ## Editing content
 
-- **Posters:** edit `assets/projects.json`; it is the single source of truth. Thumbnails, previews and PDFs are found by `slug`:
-  - `assets/thumbs/<slug>.webp` (640×853)
-  - `assets/previews/<slug>.webp` (2100×2800)
-  - `assets/posters/<slug>.pdf`
-- **`sensitive: true`:** the poster is excluded from the decorative hero mosaic, veiled on the shelf, and shown in its dialog only after the reader chooses to view it, alongside a content note with the Indian Residential Schools Crisis Line.
-- **Evidence figures:** the `EVIDENCE` list in `js/data.js`. Each entry names its source `slug`; keep values and labels identical to the poster.
-- **Short project names** (chips) and **name spelling normalisation** are also in `js/data.js`.
-- **Executive-summary numbers and goal text:** in `index.html`, section `#numbers`. The bar widths use `--share: calc(n/22)`.
+**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.8` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
 
-## Release notes
 
-Confirmed for public release by the organiser on 2026-10-19. The confirmation covered:
+- **Posters:** `assets/projects.json`. Images are found by `slug` in `assets/thumbs/`, `assets/previews/` and `assets/posters/`. `sensitive: true` gives the content-note treatment described above.
+- **Short names and the name-spelling normalisation:** `js/data.js`.
+- **The four figures:** `index.html`, section `#year`.
+- **The hub:** `HUB_UV` in `js/hero.js` is the St. Marys River on the emblem, as fractions of its width and height.
 
-- **Name spellings.** Two pairs were merged into one person each: `Md Soaib Hossain` / `Md. Soaib Hossain`, and `Mushfika Latif` / `Mushfika Binta Latif`.
-- **CSAA permissions.** Publication of the two CSAA (Children of Shingwauk Alumni Association) posters. The content note and the "view when ready" gate are kept as a matter of care.
-- **Not rendered.** `sourceNote` fields are editorial notes and are not shown on the page. `nordiksurvey.ca` is deliberately not linked.
-- **Logo.** The wordmark in the nav and footer is typeset; it can be replaced with the official logo SVG.
-
-**Coexistence with the generated exhibition.** In the published repository this page is the `/AGM/` landing page. The pages generated by `tools/build.py` stay as they were: `projects/<slug>/` (the QR-code destinations), `wall/`, `tour/`, `themes/`, `people/`, `about/` and the rest. Each story dialog links to its project page, and the footer links to the exhibition sections.
-
-**Warning:** `tools/build.py` regenerates `index.html` along with the other pages. Before copying a fresh build into `AGM/`, leave out its `index.html`, or this landing page will be overwritten.
+**Do not deploy** the raw files supplied for the redesign if they sit in this folder: `Great_Lakes_Logo_Vector_Files.zip`, `NORDIK_Institute_Logo_Vector_Files.zip` and `page_hook.mp4`. The video is a recording of a third-party site.
 
 ## Structure
 
 ```
 AGM/
-  index.html            markup, static report figures, story dialog
-  css/agm.css           design tokens (report palette), components, responsive + reduced-motion rules
-  js/main.js            boot order: data → intro → render → motion → mosaic → wipe
-  js/data.js            loads projects.json; categories, aliases, researchers, partners, EVIDENCE
-  js/motion.js          data-attribute reveal system (GSAP matchMedia), count-ups, magnetic buttons
-  js/mosaic.js          WebGL poster-tile wordmark (+ 2D fallback)
-  js/intro.js           real-progress preloader and wipe
-  js/shelf.js           pinned / swipe research shelf, HUD, theme highlighting
-  js/dialog.js          story dialog, zoom, consent gate, deep links
-  js/sections.js        marquees, evidence grid, people index + poster peek
-  js/dotfield.js        "THANK YOU" spring/ripple canvas
-  js/nav.js             progress hairline, hide-on-scroll, section spy, mobile menu
-  js/util.js            escaping and DOM helpers
-  vendor/               GSAP 3.15.0 + ScrollTrigger (GSAP standard "no charge" licence)
-  fonts/                Barlow, Barlow Condensed, Fraunces, IBM Plex Mono (SIL OFL; see fonts/licenses)
-  assets/               provided posters, previews, thumbnails, projects.json, reports/annual-executive-summary.pdf
+  index.html          hero, research shelf, year, close, story dialog
+  css/agm.css         brand tokens, components, responsive and reduced-motion rules
+  js/main.js          boot order
+  js/hero.js          hook choreography, orbit, links to the hub, pointer tilt, scroll-away
+  js/pointcloud.js    WebGL renderer: emblem sampling, intro → dust → home motion, 3D tilt
+  js/shelf.js         pinned / swipe research shelf
+  js/dialog.js        story dialog, zoom, content gate, deep links
+  js/motion.js        reveals and count-ups
+  js/nav.js           solid/hidden nav, section marking, smooth links
+  js/data.js          loads projects.json
+  js/util.js          escaping and DOM helpers
+  vendor/             GSAP 3.15.0 + ScrollTrigger (GSAP standard "no charge" licence)
+  fonts/              EB Garamond, Barlow (SIL OFL; see fonts/licenses)
+  assets/brand/       NORDIK logo, emblem and wordmark
+  assets/             posters, previews, thumbnails, projects.json, reports/
 ```
 
-## Accessibility and motion
-
-- Skip link and semantic landmarks; one `h1`. The mosaic canvas is decorative, with the title kept as text.
-- The story dialog is a native `<dialog>`: focus is contained, Esc closes it, and focus returns to the control that opened it.
-- Everything is keyboard-operable: the shelf has prev/next buttons and arrow keys; the theme chips use `aria-pressed`.
-- `prefers-reduced-motion: reduce`:
-  - no intro, pinning, scrubbing or parallax;
-  - the mosaic and dot field are static;
-  - marquees become static wrapped lists.
-- Small text meets WCAG AA contrast on both the dark and the light sections.
+**Coexistence with the generated exhibition.** In the published repository this page is the `/AGM/` landing page. The pages generated by `tools/build.py` stay as they were: `projects/<slug>/` (the QR-code destinations), `wall/`, `tour/`, `people/` and the rest. Each story links to its project page, and the close links to the exhibition. `tools/build.py` also writes `index.html`, so leave that file out when copying a fresh build into `AGM/`.
 
 ## Testing
 
-`tools/verify-site.mjs` (in the deliverables folder) runs 37 end-to-end checks over the Chrome DevTools Protocol: desktop, deep link, reduced motion, and mobile at 390 px.
+`tools/verify-site.mjs` (in the deliverables folder) runs 41 end-to-end checks over the Chrome DevTools Protocol. They cover:
+
+- the hook: half-speed timing, the 5-minute replay window, the top-left lettering and glowing AGM line, and skipping;
+- the point cloud;
+- poster previews and opening stories;
+- the content gate;
+- the pinned shelf and the four figures;
+- deep links, reduced motion, and mobile at 390 px.
+
+Run it with:
 
 ```bash
 chrome --headless=new --remote-debugging-port=9223 --user-data-dir=%TEMP%\agm-test about:blank
