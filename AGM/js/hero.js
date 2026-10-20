@@ -32,6 +32,9 @@ export function initHero({ projectsP, onOpen, mode }) {
   const mark = document.getElementById('hero-mark');
   const splash = document.getElementById('hook-splash');
   const kicker = document.getElementById('hero-kicker');
+  const summary = document.getElementById('summary');
+  const cards = [...summary.querySelectorAll('.sum-card')];
+  const phone = () => window.matchMedia('(max-width: 760px)').matches;
   const root = document.documentElement;
   const reduced = mode === 'static';
 
@@ -65,9 +68,10 @@ export function initHero({ projectsP, onOpen, mode }) {
     st.W = r.width;
     st.H = r.height;
     if (st.W < 761) {
-      const copyH = hero.querySelector('.hero__copy').offsetHeight || 220;
-      const top = hero.querySelector('.hero__brand').getBoundingClientRect().bottom - r.top + 10;
-      const avail = Math.max(220, st.H - copyH - 30 - top);
+      // Between the AGM line and the summary card at the bottom.
+      const top = kicker.getBoundingClientRect().bottom - r.top + 10;
+      const bottom = summary.getBoundingClientRect().top - r.top - 10;
+      const avail = Math.max(220, bottom - top);
       st.cx = st.W / 2;
       st.cy = top + avail / 2;
       st.ew = Math.min(st.W * 0.72, avail * 0.62 * EMBLEM_ASPECT);
@@ -75,9 +79,9 @@ export function initHero({ projectsP, onOpen, mode }) {
       st.rx = Math.min(st.ew * 0.66, st.W / 2 - 22);
       st.ry = Math.min(st.eh * 0.86, avail / 2 - 14);
     } else {
-      const copy = hero.querySelector('.hero__copy').getBoundingClientRect();
+      // Right of the brand column (lettering, AGM line, executive summary).
       const brand = hero.querySelector('.hero__brand').getBoundingClientRect();
-      const left = Math.max(copy.right, brand.right) - r.left + 48;
+      const left = brand.right - r.left + 48;
       const right = st.W - Math.max(24, st.W * 0.04);
       const rightW = right - left;
       st.cx = left + rightW / 2;
@@ -222,7 +226,7 @@ export function initHero({ projectsP, onOpen, mode }) {
       .fromTo(points, { opacity: 0, '--hs': 0.2 }, { opacity: 1, '--hs': 1, duration: 0.9, ease: 'back.out(1.6)', stagger: { each: 0.06, from: 'random' }, clearProps: 'opacity,--hs' })
       .fromTo(lines, { opacity: 0 }, { opacity: 1, duration: 1.2, stagger: 0.04 }, 0.2)
       .fromTo(hub, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(2)' }, 0)
-      .fromTo('[data-hero-in], .hero__cue', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'expo.out', stagger: 0.08, clearProps: 'transform' }, 0.1)
+      .fromTo('.hero__cue', { opacity: 0 }, { opacity: 1, duration: 1 }, 0.4)
       .timeScale(timeScale);
   }
 
@@ -236,6 +240,39 @@ export function initHero({ projectsP, onOpen, mode }) {
       .fromTo(glow, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.15)
       .to(glow, { opacity: 0.55, duration: 1.4, ease: 'power2.inOut' })
       .timeScale(timeScale);
+  }
+
+  // Executive summary: card by card under the lettering, figures counting up.
+  // On phones it is one card at a time, cycling (tap for the next).
+  let cycle = 0;
+  function showCard(i) {
+    cards.forEach((c, k) => c.classList.toggle('is-on', k === i));
+    cycle = i;
+  }
+  summary.addEventListener('click', () => { if (phone()) showCard((cycle + 1) % cards.length); });
+  function countUp(card, delay, timeScale) {
+    card.querySelectorAll('b[data-n]').forEach((b) => {
+      const node = b.firstChild;
+      const n = Number(b.dataset.n);
+      const o = { v: 0 };
+      node.textContent = '0';
+      gsap.to(o, { v: n, duration: 1.1, delay, ease: 'power3.out', onUpdate: () => { node.textContent = String(Math.round(o.v)); } }).timeScale(timeScale);
+    });
+  }
+  function revealSummary(timeScale = 1) {
+    if (phone()) {
+      summary.classList.add('is-live');
+      showCard(0);
+      countUp(cards[0], 0, 1);
+      if (!reduced) setInterval(() => { if (!document.hidden) { const i = (cycle + 1) % cards.length; showCard(i); countUp(cards[i], 0, 1); } }, 3600);
+      return;
+    }
+    const tl = gsap.timeline();
+    cards.forEach((c, i) => {
+      tl.fromTo(c, { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.7, ease: 'expo.out', clearProps: 'transform' }, i * 0.32);
+      tl.add(() => countUp(c, 0, timeScale), i * 0.32);
+    });
+    return tl.timeScale(timeScale);
   }
 
   function finishHook() {
@@ -293,6 +330,7 @@ export function initHero({ projectsP, onOpen, mode }) {
       .to(mark, { x: 0, y: 0, scale: 1, duration: 1.4, ease: 'expo.inOut' }, B + 0.55)
       // Once the lettering has settled top-left, the AGM line glows in beneath it.
       .add(() => { revealKicker(tl.timeScale()); }, B + 1.85)
+      .add(() => { revealSummary(tl.timeScale()); }, B + 2.15)
       .add(() => { arriveOrbit(tl.timeScale()); }, B + 2.45)
       .to({}, { duration: 0.01 }, B + 3.45);
 
@@ -323,7 +361,9 @@ export function initHero({ projectsP, onOpen, mode }) {
       raf = requestAnimationFrame(frame);
     }
     gsap.from(mark, { opacity: 0, y: 20, duration: 1.2, ease: 'expo.out' });
+    gsap.set(cards, { opacity: 0 });
     gsap.delayedCall(0.6, () => revealKicker());
+    gsap.delayedCall(0.9, () => { if (phone()) gsap.set(cards, { clearProps: 'opacity' }); revealSummary(); });
     gsap.delayedCall(ok ? 1.5 : 0.3, () => arriveOrbit());
   }
 
@@ -344,7 +384,10 @@ export function initHero({ projectsP, onOpen, mode }) {
     new IntersectionObserver(([e]) => { st.visible = e.isIntersecting; }).observe(hero);
   }
 
-  if (mode === 'static') kicker.classList.add('is-breathing');
+  if (mode === 'static') {
+    kicker.classList.add('is-breathing');
+    if (phone()) { summary.classList.add('is-live'); showCard(0); }
+  }
   const ready = mode === 'hook' ? playHook() : mode === 'quick' ? playQuick() : showStatic();
   return { ready, webgl: () => !!cloud, points: () => cloud?.emblemPoints ?? 0 };
 }

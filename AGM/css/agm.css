@@ -86,14 +86,16 @@ h1, h2, h3, p, ul, ol, figure { margin: 0; }
 
 /* ---------- Nav ---------- */
 .nav { position: fixed; inset: 0 0 auto 0; z-index: 60; height: var(--nav-h); color: var(--white); transition: transform 0.6s var(--ease), background-color 0.5s, opacity 0.6s; }
-.nav.is-solid { background: rgba(3, 13, 28, 0.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+/* Scrolled nav is light, so the official logo shows in its true colours. */
+.nav.is-solid { background: rgba(245, 247, 251, 0.94); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--rule-light); color: var(--ink); }
+.nav.is-solid .nav__links a { color: var(--ink-soft); }
+.nav.is-solid .nav__links a:hover, .nav.is-solid .nav__links a[aria-current="true"] { color: var(--ink); border-color: var(--blue); }
 .nav.is-hidden { transform: translateY(-101%); }
 html.is-hook .nav { opacity: 0; pointer-events: none; }
 .nav__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; transition: opacity 0.5s, visibility 0.5s; }
 .nav:not(.is-solid) .brand { opacity: 0; visibility: hidden; }
-.brand img { width: 38px; height: auto; }
-.brand span { font: 500 1.15rem/1 var(--f-serif); letter-spacing: 0.32em; }
+.brand img { height: 38px; width: auto; }
 .nav__links { display: flex; align-items: center; gap: clamp(14px, 2.6vw, 36px); list-style: none; margin: 0; padding: 0; }
 .nav__links a { text-decoration: none; font: 600 0.74rem/1 var(--f-sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--mist); padding: 8px 0; border-bottom: 1px solid transparent; transition: color 0.3s, border-color 0.3s; }
 .nav__links a:hover, .nav__links a[aria-current="true"] { color: var(--white); border-color: var(--pale); }
@@ -106,7 +108,7 @@ html.is-hook .hero { background: var(--paper); }
 html.is-hook .hero__glow { opacity: 0; }
 .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; touch-action: pan-y; }
 .hero__ui { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.hero__copy, .hero__brand { pointer-events: auto; }
+.hero__brand { pointer-events: auto; }
 .links { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
 .links line { stroke: rgba(159, 186, 221, 0.13); stroke-width: 1; transition: stroke 0.35s, stroke-width 0.35s; }
 .links line.is-on { stroke: rgba(255, 255, 255, 0.9); stroke-width: 1.4; stroke-dasharray: 4 6; animation: flow 0.9s linear infinite; }
@@ -157,18 +159,33 @@ html.is-hook .hero__glow { opacity: 0; }
 }
 .hero__kicker.is-breathing .hero__kicker-glow { animation: kicker-breathe 4.5s ease-in-out infinite; }
 @keyframes kicker-breathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-/* Description and call to action, bottom-left. */
-.hero__copy { position: absolute; z-index: 3; left: var(--gutter); bottom: clamp(32px, 6.5vh, 64px); width: min(30vw, 420px); display: grid; gap: 22px; }
 #hero-mark { --wm-main: #f4f8fd; --wm-accent: var(--red-glow); transform-origin: 0 0; }
 html.is-hook #hero-mark { --wm-main: var(--blue); --wm-accent: var(--red); }
-.hero__lede { font: 400 clamp(1.15rem, 1.5vw, 1.4rem)/1.45 var(--f-serif); color: var(--mist); max-width: 30ch; }
-.hero__lede em { color: var(--white); }
-@media (hover: hover) { .hint-touch { display: none; } }
-@media (hover: none) { .hint-hover { display: none; } }
 .hook-emblem { position: absolute; z-index: 3; left: 0; top: 0; pointer-events: none; opacity: 0; }
 .hero__cue { position: absolute; z-index: 3; left: 50%; bottom: 22px; transform: translateX(-50%); display: grid; justify-items: center; gap: 8px; font: 600 0.6rem/1 var(--f-sans); letter-spacing: 0.3em; color: var(--mist-faint); }
 .hero__cue i { width: 1px; height: 34px; background: linear-gradient(var(--pale), transparent); animation: cue 2.2s var(--ease-io) infinite; transform-origin: top; }
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* Executive summary, under the lettering: item by item, icons as in the PDF.
+   Sizes scale with viewport height so it always fits beside the emblem. */
+.summary { --u: clamp(0.62rem, 1.32vh, 0.8rem); display: grid; gap: clamp(6px, 1.3vh, 12px); margin-top: clamp(8px, 2.2vh, 22px); }
+.sum-card { display: grid; align-items: center; gap: 10px 12px; padding: clamp(6px, 1.1vh, 10px) 12px; border: 1px solid var(--rule-dark); border-radius: 10px; background: rgba(8, 24, 47, 0.62); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sx__icon { width: clamp(20px, 3vh, 28px); height: clamp(20px, 3vh, 28px); flex: none; color: var(--pale); }
+.sum-card b { font: 400 calc(var(--u) * 2.4)/0.9 var(--f-serif); color: var(--white); font-variant-numeric: lining-nums tabular-nums; }
+.sum-card b sup { font-size: 0.5em; color: var(--red-glow); vertical-align: top; position: relative; top: 0.15em; }
+.sum-card span, .sum-card p { font: 500 var(--u)/1.3 var(--f-sans); color: var(--mist); }
+.sum-card--top { grid-template-columns: 1fr 1fr; }
+.sum-card--top .sx { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; }
+.sum-card--top .sx b { font-size: calc(var(--u) * 3.2); }
+.sum-card--top .sx span { flex-basis: 100%; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; }
+.sum-card--goal { grid-template-columns: auto 1fr auto; }
+.sum-card--goal p em { display: block; font: 600 calc(var(--u) * 0.95)/1.2 var(--f-sans); font-style: normal; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-glow); margin-bottom: 2px; }
+.sum-card--goal b { text-align: right; min-width: 2ch; }
+.sum-card--goal b::after { content: "projects"; display: block; font: 600 calc(var(--u) * 0.7)/1.4 var(--f-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--mist-faint); }
+.sum-card--trio { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.sum-card--trio .sx { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 6px; }
+.sum-card--trio .sx span { grid-column: 1 / -1; font-size: calc(var(--u) * 0.86); }
+
 /* Splash: the official logo, painted by CSS alone so the first frame is
    intentional even before any script runs. Its box matches the JS lockup
    exactly (min(78vw, 980px), centred), so the hook dissolves this very logo. */
@@ -181,7 +198,7 @@ html.is-hook .hook-splash {
 }
 @keyframes splash-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 /* Until the hook choreographs them, nothing half-built shows through. */
-html.is-hook #hero-mark, html.is-hook #hero-kicker, html.is-hook [data-hero-in], html.is-hook .hero__cue, html.is-hook .hub { opacity: 0; }
+html.is-hook #hero-mark, html.is-hook #hero-kicker, html.is-hook .summary:not(.is-live) .sum-card, html.is-hook .hero__cue, html.is-hook .hub { opacity: 0; }
 html.is-hook:not(.hook-live) .hook-skip { visibility: hidden; }
 .hook-skip { position: absolute; z-index: 4; right: var(--gutter); bottom: 22px; border: 0; background: none; cursor: pointer; font: 600 0.66rem/1 var(--f-sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 0; }
 html:not(.is-hook) .hook-skip { display: none; }
@@ -214,18 +231,6 @@ html:not(.is-hook) .hook-skip { display: none; }
 .card:has(.card__link:focus-visible) .card__media { outline: 2px solid var(--blue); outline-offset: 4px; }
 .card__theme { font: 500 0.78rem/1.3 var(--f-sans); color: var(--ink-soft); }
 
-/* ---------- The year (brand blue band) ---------- */
-.year { background: var(--blue); color: var(--white); padding-block: clamp(80px, 13vh, 150px); }
-.year .eyebrow { color: rgba(255, 255, 255, 0.82); }
-.year__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
-.year__head .title { margin-top: 14px; }
-.year__head .title em { color: #cfe0f7; }
-.stats { margin-top: clamp(44px, 7vh, 80px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(255, 255, 255, 0.28); }
-.stat { padding: 28px 24px 0 0; display: grid; gap: 10px; align-content: start; }
-.stat + .stat { padding-left: 24px; border-left: 1px solid rgba(255, 255, 255, 0.18); }
-.stat b { font: 400 clamp(3.6rem, 7vw, 6.4rem)/0.9 var(--f-serif); font-variant-numeric: lining-nums tabular-nums; }
-.stat b sup { font-size: 0.45em; vertical-align: top; position: relative; top: 0.25em; color: #ffb3bf; }
-.stat > span { font: 500 1rem/1.4 var(--f-sans); color: rgba(255, 255, 255, 0.86); max-width: 22ch; }
 
 /* ---------- Close ---------- */
 .close { background: var(--night); color: var(--white); padding-block: clamp(90px, 15vh, 170px) 36px; position: relative; overflow: hidden; }
@@ -284,20 +289,21 @@ html:not(.is-hook) .hook-skip { display: none; }
   .card[data-rack] { transform: none; opacity: 1; }
 }
 @media (max-width: 900px) {
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
   .close__row { grid-template-columns: 1fr; }
   .close__links { justify-items: start; text-align: left; }
   .close__links nav { justify-content: flex-start; }
 }
 @media (max-width: 760px) {
   html.is-hook .hook-splash { width: 90vw; }
-  .brand span { display: none; }
+  /* Phones: the brand block spans the hero (logo top, summary bottom); clicks
+     pass through the middle to the orbit. One summary card shows at a time. */
+  .hero__brand { bottom: 18px; right: var(--gutter); display: flex; flex-direction: column; pointer-events: none; }
+  .summary { --u: 0.74rem; position: relative; display: block; margin-top: auto; height: 124px; pointer-events: auto; }
+  .sum-card { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 0.6s var(--ease), visibility 0s 0.6s; }
+  .sum-card.is-on { opacity: 1; visibility: visible; transition: opacity 0.6s var(--ease); }
   .nav__links { gap: 16px; }
   .hero__brand { top: calc(var(--nav-h) + 2px); width: min(80vw, 340px); gap: 12px; }
   .hero__kicker { font-size: 0.62rem; letter-spacing: 0.17em; }
-  .hero__copy { bottom: 24px; width: auto; right: var(--gutter); gap: 16px; }
-  .hero__lede { font-size: 1.05rem; }
   .hero__cue { display: none; }
   .pp { width: 30px; margin: -20px 0 0 -15px; }
   .pp--note { width: 22px; margin: -11px 0 0 -11px; }
@@ -309,8 +315,6 @@ html:not(.is-hook) .hook-skip { display: none; }
   .story__body { overflow: visible; }
 }
 @media (max-width: 520px) {
-  .stats { grid-template-columns: 1fr; }
-  .stat + .stat { padding-left: 0; border-left: 0; }
   .nav__links li:last-child { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
