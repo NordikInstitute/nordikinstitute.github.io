@@ -225,8 +225,8 @@ html.anniv-on .anniv { display: block; position: absolute; inset: 0; z-index: 5;
 }
 /* The dissolve mask only once the reveal is over: before that it would clip
    the glow and the light streak to the text's box. */
-html.anniv-dusk .anniv__text {
-  --as1: #ffffff; --as2: #c9d7ea; --as3: #6f88aa;
+html.anniv-dusk .anniv__text { --as1: #ffffff; --as2: #c9d7ea; --as3: #6f88aa; }
+html.anniv-cut .anniv__text {
   -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--cut) - 8%), #000 calc(var(--cut) + 8%));
   mask-image: linear-gradient(90deg, transparent calc(var(--cut) - 8%), #000 calc(var(--cut) + 8%));
 }
@@ -407,6 +407,19 @@ a.plist__email:hover { text-decoration: underline; }
 .story__bar .btn:hover { background: var(--white); }
 
 .notice { position: fixed; left: 50%; top: 16px; transform: translateX(-50%); z-index: 400; max-width: min(640px, calc(100vw - 32px)); padding: 14px 18px; border-radius: 12px; background: var(--red); color: #fff; font-size: 0.95rem; }
+
+/* ---------- Loop mode (?loop, shown by the hidden display page AGM/1/) ---------- */
+/* Only the opening itself (logo, anniversary title, both vanishing): no header,
+   no other sections, none of the hero that follows, no input. */
+html.is-loop, html.is-loop body { overflow: hidden; cursor: none; }
+html.is-loop .nav, html.is-loop .skip-link, html.is-loop main > section:not(.hero), html.is-loop .foot,
+html.is-loop .hook-skip, html.is-loop .hero__cue { display: none !important; }
+html.is-loop #hero-mark, html.is-loop .hero__kicker, html.is-loop .summary, html.is-loop .orbit,
+html.is-loop .links, html.is-loop .hub, html.is-loop .pp__label { visibility: hidden !important; }
+html.is-loop .hero, html.is-loop .hero * { pointer-events: none !important; }
+/* White all the time: no night, no glow. */
+html.is-loop body, html.is-loop .hero { background: #fff !important; }
+html.is-loop .hero__glow { display: none !important; }
 
 /* ---------- Responsive ---------- */
 /* Portrait tablets: a plain 4 x 3 grid, still one screen. */

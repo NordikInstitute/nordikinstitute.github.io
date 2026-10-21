@@ -15,10 +15,12 @@ const FADE_AT = 3.6; // s after the dissolve starts: the particles begin to sett
 const SWEEP = 0.9;
 const FADE = 2.2;    // s for most to fade and the rest to dim into the atmosphere
 const AMBIENT = 0.5; // brightness of the lasting atmosphere (the dissolve is 1)
+const LOOP_HOLD = 7.5; // loop mode: s more for the logo and title to rest before they vanish
 
-// gold (the "20th"), white and pale (the caption), then brand glow blue and rose.
-const COLOURS = [[246, 222, 166], [236, 244, 255], [159, 186, 221], [91, 155, 240], [255, 128, 148]];
-const [GOLD, WHITE, PALE, BLUE, ROSE] = [0, 1, 2, 3, 4];
+// gold (the "20th"), white and pale (the caption), then brand glow blue and rose;
+// on a light page (before night falls, or the white loop page): deep gold and brand blue.
+const COLOURS = [[246, 222, 166], [236, 244, 255], [159, 186, 221], [91, 155, 240], [255, 128, 148], [190, 138, 44], [0, 84, 166]];
+const [GOLD, WHITE, PALE, BLUE, ROSE, DEEP_GOLD, DEEP_BLUE] = [0, 1, 2, 3, 4, 5, 6];
 
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
@@ -54,6 +56,7 @@ export function initAnniversary({ mode }) {
   if (!ctx) return noop;
 
   const phone = () => window.innerWidth < 761;
+  const looping = root.classList.contains('is-loop'); // the hidden display page
   const sprites = COLOURS.map((c) => glowSprite(c));
   let W = 0, H = 0, dpr = 1;
   function size() {
@@ -210,8 +213,9 @@ export function initAnniversary({ mode }) {
         const w = u >= 1 ? 1 : u;
         fx[i] += Math.cos(ang) * 10 * real * w;
         fy[i] += (Math.sin(ang) * 10 - 3) * real * w;
-        x = hx[i] + dx * e - (dy / len) * s + fx[i];
-        y = hy[i] + dy * e + (dx / len) * s + fy[i];
+        // (The drift fades with u, so a mote flown back home lands on its letter.)
+        x = hx[i] + dx * e - (dy / len) * s + fx[i] * w;
+        y = hy[i] + dy * e + (dx / len) * s + fy[i] * w;
         if (u >= 1) {
           // Settled: wrap softly around the edges so the field stays full.
           if (x < -40) fx[i] += W + 80; else if (x > W + 40) fx[i] -= W + 80;
@@ -223,7 +227,7 @@ export function initAnniversary({ mode }) {
       a *= (keep[i] ? kKeep : kDrop) * (0.72 + 0.28 * Math.sin(clock * (0.8 + ph[i] * 1.4) + ph[i] * 30));
       if (a <= 0.004) continue;
       ctx.globalAlpha = a;
-      ctx.drawImage(sprites[night.v < 0.5 && col[i] !== GOLD ? BLUE : col[i]], x - d / 2, y - d / 2, d, d);
+      ctx.drawImage(sprites[night.v < 0.5 ? (col[i] === GOLD ? DEEP_GOLD : DEEP_BLUE) : col[i]], x - d / 2, y - d / 2, d, d);
     }
     ctx.globalAlpha = 1;
   }
@@ -279,7 +283,7 @@ export function initAnniversary({ mode }) {
 
   // Seconds until the title reveal (CSS, timed from first paint) has finished, plus a beat.
   function holdFor() {
-    return Math.max(0, ...textEl.getAnimations({ subtree: true }).map((a) => (a.effect.getComputedTiming().endTime - (a.currentTime ?? 0)) / 1000)) + HOLD;
+    return Math.max(0, ...textEl.getAnimations({ subtree: true }).map((a) => (a.effect.getComputedTiming().endTime - (a.currentTime ?? 0)) / 1000)) + HOLD + (looping ? LOOP_HOLD : 0);
   }
 
   // The lights go down: the text takes its night colours (CSS) and the particles will glow.
@@ -289,7 +293,15 @@ export function initAnniversary({ mode }) {
   }
 
   function dissolve() {
-    if (tl) return;
+    if (tl) {
+      // Loop mode: the same motes leave their letters again.
+      if (!looping) return;
+      fx.fill(0); fy.fill(0);
+      root.classList.add('anniv-cut');
+      gsap.set(canvas, { opacity: 1 });
+      tl.timeScale(skipped ? 6 : 1).play(0);
+      return;
+    }
     const { picks, left, width } = sampleText(phone() ? 1500 : 2800);
 
     alloc(picks.length);
@@ -304,19 +316,20 @@ export function initAnniversary({ mode }) {
       if (puff[i]) sz[i] = 16 + Math.random() * 22;
     }
     built = true;
+    root.classList.add('anniv-cut');
     gsap.set(canvas, { opacity: 1 });
     // "20th" and "Anniversary Celebration" go together, with the logo.
     tl = gsap.timeline()
-      .fromTo(textEl, { '--cut': '-15%' }, { '--cut': '115%', duration: SWEEP, ease: 'none' }, 0)
-      .to(fade, { v: 1, duration: FADE, ease: 'power2.inOut' }, FADE_AT)
-      .add(settle, FADE_AT + FADE);
+      .fromTo(textEl, { '--cut': '-15%' }, { '--cut': '115%', duration: SWEEP, ease: 'none' }, 0);
+    // In loop mode the particles stay at full strength until they fly back (reform).
+    if (!looping) tl.to(fade, { v: 1, duration: FADE, ease: 'power2.inOut' }, FADE_AT).add(settle, FADE_AT + FADE);
     if (skipped) tl.timeScale(6);
   }
 
   // Settled: the text is gone; the kept particles are the lasting atmosphere.
   function settle() {
     opening = false;
-    root.classList.remove('anniv-on', 'anniv-dusk');
+    root.classList.remove('anniv-on', 'anniv-dusk', 'anniv-cut');
     cull();
   }
 
@@ -327,5 +340,29 @@ export function initAnniversary({ mode }) {
     tl?.timeScale(6);
   }
 
-  return { holdFor, dusk, dissolve, skip };
+  // Loop mode: while the logo forms back, the title's particles fade away and
+  // the lights come up; the title itself stays hidden until reveal().
+  function reform(sec) {
+    root.classList.remove('anniv-dusk');
+    gsap.to(night, { v: 0, duration: sec, ease: 'power2.inOut' });
+    gsap.to(canvas, { opacity: 0, duration: sec * 0.7, ease: 'power2.inOut', onComplete: () => tl.pause(0) });
+  }
+
+  // Loop mode: once the logo is whole, the title appears as usual (the subtitle
+  // slides in, then the glowing "20th", light sweeps and streak). Returns the
+  // seconds until that reveal has finished plus the rest before the next vanish.
+  function reveal() {
+    // Finished CSS animations are gone, so restart them: off, reflow, on. Their
+    // delays count from page load (after the logo's 1 s draw), which is already done.
+    const els = [textEl, ...textEl.querySelectorAll('*')];
+    els.forEach((el) => { el.style.animation = 'none'; });
+    void textEl.offsetWidth;
+    els.forEach((el) => { el.style.animation = ''; });
+    textEl.getAnimations({ subtree: true }).forEach((a) => { a.currentTime = 1000; });
+    root.classList.remove('anniv-cut');
+    gsap.set(textEl, { '--cut': '-15%' });
+    return holdFor();
+  }
+
+  return { holdFor, dusk, dissolve, reform, reveal, skip };
 }

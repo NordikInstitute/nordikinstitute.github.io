@@ -40,6 +40,10 @@ export function initHero({ projectsP, onOpen, mode, opening }) {
   const phone = () => window.matchMedia('(max-width: 760px)').matches;
   const root = document.documentElement;
   const reduced = mode === 'static';
+  // Loop mode (the hidden display page): the scattered emblem never regathers into
+  // the big emblem; it flows back into the logo instead (see playHook).
+  const looping = root.classList.contains('is-loop');
+  const gatherAt = looping ? 1e9 : GATHER_AT;
 
   let projects = [];
   let points = [];
@@ -175,7 +179,7 @@ export function initHero({ projectsP, onOpen, mode, opening }) {
     const ty = st.hasPointer ? st.tiltTarget[1] : Math.sin(st.time * 0.23) * 0.12;
     st.tilt[0] += (tx - st.tilt[0]) * 0.05;
     st.tilt[1] += (ty - st.tilt[1]) * 0.05;
-    if (cloud) cloud.draw({ t: st.t, time: st.time, gatherAt: GATHER_AT, tilt: st.tilt, scatter: st.scatter, mouse: st.mouse, light: st.light });
+    if (cloud) cloud.draw({ t: st.t, time: st.time, gatherAt, tilt: st.tilt, scatter: st.scatter, mouse: st.mouse, light: st.light });
     if (st.orbitOn) placeOrbit(dt);
   }
 
@@ -292,7 +296,8 @@ export function initHero({ projectsP, onOpen, mode, opening }) {
     window.__hookStartedAt = performance.now();
     root.classList.add('hook-live');
     // Remember when the full hook was shown; the head script replays it after 5 minutes.
-    try { localStorage.setItem(SHOWN_KEY, String(Date.now())); } catch { /* storage unavailable */ }
+    // (Not in loop mode: the display page must not hold back the hook on the real page.)
+    if (!root.classList.contains('is-loop')) try { localStorage.setItem(SHOWN_KEY, String(Date.now())); } catch { /* storage unavailable */ }
     layout();
     const lk = lockup();
     const markRect = mark.getBoundingClientRect();
@@ -327,15 +332,19 @@ export function initHero({ projectsP, onOpen, mode, opening }) {
     const tl = gsap.timeline({ onComplete: () => { finishHook(); done(); } });
     st.tl = tl;
     st.B = B;
+    let reforming = false;
     tl.add(() => {
+      if (reforming) return;
       // The splash becomes points: same logo, same place, now alive.
       gsap.set(mark, { opacity: 1 });
-      gsap.set(splash, { visibility: 'hidden' });
+      if (looping) gsap.to(splash, { autoAlpha: 0, duration: 0.5, ease: 'power1.out' });
+      else gsap.set(splash, { visibility: 'hidden' });
     }, B)
-      .to(st, { light: 0, duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
-      .to(hero, { backgroundColor: '#030d1c', duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
+      // (Loop mode stays white: the lights never go down.)
+      .to(st, { light: looping ? 1 : 0, duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
+      .to(hero, { backgroundColor: looping ? '#ffffff' : '#030d1c', duration: 1.3, ease: 'power2.inOut' }, B + 0.05)
       // The anniversary text turns to particles at the same instant as the emblem.
-      .add(() => { opening?.dusk(1.3 / tl.timeScale()); opening?.dissolve(); }, B)
+      .add(() => { if (reforming) return; if (!looping) opening?.dusk(1.3 / tl.timeScale()); opening?.dissolve(); }, B)
       .to('.hero__glow', { opacity: 1, duration: 1.6 }, B + 0.35)
       .to(mark, { '--wm-main': '#f4f8fd', '--wm-accent': '#ff5a72', duration: 1.1, ease: 'power2.inOut' }, B + 0.15)
       .to(mark, { x: 0, y: 0, scale: 1, duration: 1.4, ease: 'expo.inOut' }, B + 0.55)
@@ -344,6 +353,33 @@ export function initHero({ projectsP, onOpen, mode, opening }) {
       .add(() => { revealSummary(tl.timeScale()); }, B + 2.15)
       .add(() => { arriveOrbit(tl.timeScale()); }, B + 2.45)
       .to({}, { duration: 0.01 }, B + 3.45);
+
+    if (looping) {
+      // Hidden display page: once vanished, the particles float, then the logo
+      // forms back (points home, lights up, lettering in) while the title's
+      // particles fade; then the title appears as usual, rests, and it all
+      // vanishes again: forever, without a reload.
+      const P = B + 1.2;
+      const back = () => {
+        // The pause also fires as the playhead leaves P backwards: once per cycle.
+        // "reforming" stays up until the next vanish starts, so scrubbing back across
+        // B (and resting there) never re-triggers the vanish.
+        if (reforming) return;
+        reforming = true;
+        gsap.delayedCall(0.8, () => {
+          opening?.reform(2.8);
+          gsap.to(splash, { autoAlpha: 1, duration: 1.1, delay: 1.7, ease: 'power1.inOut' });
+          gsap.to(tl, {
+            time: B - 0.001, duration: 2.8, ease: 'power2.inOut',
+            onComplete: () => {
+              const wait = opening?.reveal() ?? 2.6;
+              gsap.delayedCall(wait, () => { reforming = false; tl.play(B - 0.001); });
+            },
+          });
+        });
+      };
+      tl.addPause(P, back);
+    }
 
     // Half speed by default; ?hookspeed=0.25 (dev aid for capture) slows it further.
     tl.timeScale(speed);
