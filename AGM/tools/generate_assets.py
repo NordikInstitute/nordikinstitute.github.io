@@ -30,9 +30,9 @@ for i,p in enumerate(rows,1):
     thumb.save(OUT/'thumbs'/f"{p['slug']}.webp",'WEBP',quality=77,method=5)
     print(i,p['slug'], f'{im.width}x{im.height}', f"{(OUT/'previews'/f'{p['slug']}.webp').stat().st_size/1024:.0f}kb")
     d.close()
-src=UPLOAD/'NORDIK_Executive_Summary_Page_11(2).pdf'
-shutil.copy2(src,OUT/'reports'/'annual-executive-summary.pdf') if (OUT/'reports').exists() else ((OUT/'reports').mkdir(parents=True),shutil.copy2(src,OUT/'reports'/'annual-executive-summary.pdf'))
+# The executive summary preview comes from page 11 of the published annual report.
+src=OUT/'reports'/'annual-report-2025-2026.pdf'
 d=fitz.open(src)
-pix=d[0].get_pixmap(matrix=fitz.Matrix(1.6,1.6),alpha=False,colorspace=fitz.csRGB)
+pix=d[10].get_pixmap(matrix=fitz.Matrix(1.6,1.6),alpha=False,colorspace=fitz.csRGB)
 im=Image.frombytes('RGB',(pix.width,pix.height),pix.samples);im.save(OUT/'previews'/'annual-summary.webp','WEBP',quality=82)
 print('done')

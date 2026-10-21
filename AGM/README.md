@@ -24,7 +24,7 @@ Fonts and GSAP are vendored, so the page works offline when served from a laptop
 | Header | The white header holds only the NORDIK logo and three tabs: **Posters**, **Projects** and **Annual Report**. It is transparent over the hero and stays shown from the poster wall down, with the current tab underlined. On phones the logo and tab text shrink so all three fit (below 375 px the last tab reads "Report"). |
 | Posters | The twelve posters as a tight tile wall, with no headings around them. On screens wider than 760 px the wall is exactly one screen tall: six columns with 6 px gaps (two featured posters take a 2×2 tile), with the grid's width worked out from the height left under the white header (logo and tabs, Posters active), so every poster shows whole on any desktop or laptop. The header stays shown over the wall and no poster sits beneath it. A scroll that stops between the hero and the wall settles on the wall. Portrait tablets get a 4×3 grid; phones get two scrolling columns. Hovering or focusing a tile flips it to show the poster's title, a one-line summary on the featured tiles, and its research team or partners. Clicking opens the poster itself. |
 | Projects | All 22 projects of the year as a numbered list: the project, then each lead beside their email (mailto links), aligned down the list on desktop and stacked on phones. The data is `assets/project-list.json`. The ten projects with a poster on the wall have a "View poster" button that opens it. |
-| Annual Report | A placeholder until the report PDF is supplied: a cover, a "Coming soon" note and a link to the executive summary PDF. To publish the report, save the PDF in `assets/reports/` and replace the placeholder in the `#report` section of `index.html`. |
+| Annual Report | The 2025–2026 annual report, *A Vision for Tomorrow* (`assets/reports/annual-report-2025-2026.pdf`, 35 pages): its cover (which opens the PDF), "Read the report" and "Download". The cover image is `annual-report-2025-2026-cover.webp`, rendered from page 1. |
 | Footer | Just the NORDIK website and the contact email. |
 | Poster viewer | The poster opens full width in a window you can scroll (wheel, touch, drag, or the scrollbar). Zoom enlarges it in place, and Download saves the PDF. Deep-link with `#story/<slug>`. ← and → move between posters; Esc closes. There is no written summary. |
 
@@ -76,7 +76,7 @@ AGM/
 
 ## Testing
 
-`tools/verify-site.mjs` (in the deliverables folder) runs 63 end-to-end checks over the Chrome DevTools Protocol. They cover:
+`tools/verify-site.mjs` (in the deliverables folder) runs 64 end-to-end checks over the Chrome DevTools Protocol. They cover:
 
 - the 20th anniversary text: shown under the logo from the first frame (also on phones), vanishing with it into particles, the lasting atmosphere, and none of it under reduced motion;
 - the hook: half-speed timing, the 5-minute replay window, the top-left lettering and glowing AGM line, and skipping;

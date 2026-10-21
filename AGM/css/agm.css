@@ -364,20 +364,17 @@ a.plist__email:hover { text-decoration: underline; }
 .plist__error { padding: 18px 0; color: var(--red); }
 
 /* ---------- Annual report ---------- */
-/* A placeholder cover and note until the report PDF is supplied. */
+/* The report's real cover (it opens the PDF) beside its title and actions. */
 .report { display: flex; align-items: center; min-height: 100vh; min-height: 100svh; background: var(--night); color: var(--white); padding: calc(var(--nav-h) + 40px) 0 64px; }
-.report__inner { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-.report__cover {
-  position: relative; display: flex; flex-direction: column; gap: 8px; aspect-ratio: 3 / 4; padding: 28px; overflow: hidden; border-radius: 6px;
-  background: var(--paper); color: var(--ink); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-}
-.report__cover > img:first-child { width: 62%; height: auto; margin-bottom: auto; }
-.report__cover-title { position: relative; font: 400 clamp(1.8rem, 2.6vw, 2.4rem)/1 var(--f-serif); }
-.report__cover-year { position: relative; font: 600 0.74rem/1 var(--f-sans); letter-spacing: 0.22em; color: var(--red); }
-.report__cover-mark { position: absolute; right: -20%; bottom: -16%; width: 78%; opacity: 0.16; }
+.report__inner { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.report__cover { display: block; overflow: hidden; border-radius: 6px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45); transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease); }
+.report__cover img { display: block; width: 100%; height: auto; }
+.report__cover:hover, .report__cover:focus-visible { transform: translateY(-6px); box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--pale); }
 .report__text { display: grid; justify-items: start; gap: 18px; max-width: 36rem; }
-.report__badge { padding: 7px 14px; border: 1px solid rgba(159, 186, 221, 0.45); border-radius: 999px; font: 600 0.66rem/1 var(--f-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--pale); }
 .report__lead { font: 400 1.15rem/1.6 var(--f-sans); color: var(--mist); }
+.report__lead em { font: italic 400 1.25em/1.3 var(--f-serif); color: var(--white); }
+.report__meta { font: 600 0.7rem/1 var(--f-sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--pale); }
+.report__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
 
 /* ---------- Footer ---------- */
 /* Just the website and the contact email. */
@@ -457,6 +454,7 @@ a.plist__email:hover { text-decoration: underline; }
   .report__inner { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
   .report__cover { width: min(260px, 66vw); }
   .report__text { justify-items: center; }
+  .report__actions { justify-content: center; }
 }
 /* Phones: a smaller logo and tighter tabs so all three fit beside it. */
 @media (max-width: 520px) {

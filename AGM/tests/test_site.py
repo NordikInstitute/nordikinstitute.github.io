@@ -107,7 +107,7 @@ class SiteTests(unittest.TestCase):
   else:
    self.assertIn('name="robots" content="noindex,nofollow"',home)
    self.assertIn('Disallow: /',(SITE/'robots.txt').read_text())
-  self.assertTrue((SITE/'assets/reports/annual-executive-summary.pdf').exists())
+  self.assertTrue((SITE/'assets/reports/annual-report-2025-2026.pdf').exists())
 
  def test_approved_links_only(self):
   for p in PROJECTS:
