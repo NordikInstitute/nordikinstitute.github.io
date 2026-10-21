@@ -26,7 +26,7 @@ Fonts and GSAP are vendored, so the page works offline when served from a laptop
 | Projects | All 22 projects of the year as a numbered list: the project, then each lead beside their email (mailto links), aligned down the list on desktop and stacked on phones. The data is `assets/project-list.json`. The ten projects with a poster on the wall have a "View poster" button that opens it. |
 | Annual Report | A placeholder until the report PDF is supplied: a cover, a "Coming soon" note and a link to the executive summary PDF. To publish the report, save the PDF in `assets/reports/` and replace the placeholder in the `#report` section of `index.html`. |
 | Footer | Just the NORDIK website and the contact email. |
-| Poster viewer | The poster fills the window, with zoom. Deep-link with `#story/<slug>`. ← and → move between posters; Esc closes. There is no written summary. |
+| Poster viewer | The poster opens full width in a window you can scroll (wheel, touch, drag, or the scrollbar). Zoom enlarges it in place, and Download saves the PDF. Deep-link with `#story/<slug>`. ← and → move between posters; Esc closes. There is no written summary. |
 
 `prefers-reduced-motion: reduce` turns off the hook and all scroll-driven motion, and the wall tiles fade to their backs instead of turning. The cloud is drawn once, assembled and still. Without WebGL, the static emblem is shown and the poster points still work.
 
@@ -38,7 +38,7 @@ Fonts and GSAP are vendored, so the page works offline when served from a laptop
 
 ## Editing content
 
-**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.38` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
+**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.41` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
 
 
 - **Projects list:** `assets/project-list.json` (title, leads with optional email, and an optional `poster` slug that adds the "View poster" button).

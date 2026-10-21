@@ -387,16 +387,23 @@ a.plist__email:hover { text-decoration: underline; }
 .foot a:hover { color: var(--white); border-color: var(--pale); }
 
 /* ---------- Poster viewer ---------- */
-/* The poster fills the dialog. Controls sit over it; there is no written summary. */
+/* The poster is shown full width and the window scrolls, because a 3:4 sheet
+   is taller than the screen. Controls sit over it; there is no written summary. */
 .story { width: min(920px, calc(100vw - 32px)); height: calc(100svh - 32px); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 14px; background: #0a1426; color: var(--white); overflow: hidden; box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.6); }
 .story::backdrop { background: rgba(3, 13, 28, 0.78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-.story__poster { position: relative; height: 100%; overflow: hidden; background: #0a1426; display: grid; }
-.story__poster img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.55s var(--ease), opacity 0.4s; }
-.story__poster.is-zoomed img { cursor: zoom-out; }
+.story__poster { position: relative; height: 100%; overflow: hidden; background: #0a1426; }
+.story__scroll { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; background: #0a1426; scrollbar-color: #e6c48a rgba(255, 255, 255, 0.08); cursor: grab; }
+.story__scroll:focus-visible { outline: none; }
+.story__scroll.is-panning { cursor: grabbing; }
+.story__scroll::-webkit-scrollbar { width: 12px; height: 12px; }
+.story__scroll::-webkit-scrollbar-thumb { background: #e6c48a; border: 3px solid #0a1426; border-radius: 999px; }
+.story__scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.06); }
+.story__scroll img { width: 100%; height: auto; max-width: 100%; cursor: inherit; user-select: none; -webkit-user-drag: none; }
+.story__poster.is-zoomed .story__scroll img { width: 240%; max-width: none; }
 .story__poster.is-loading img { opacity: 0; }
-.story__bar { position: absolute; z-index: 2; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; background: linear-gradient(to bottom, rgba(3, 13, 28, 0.72), transparent); }
-.story__bar .count { font: 600 0.7rem/1 var(--f-sans); letter-spacing: 0.2em; color: var(--pale); }
-.story__bar div { display: flex; align-items: center; gap: 8px; }
+.story__bar { position: absolute; z-index: 2; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px 12px 14px; background: linear-gradient(to bottom, rgba(3, 13, 28, 0.72), transparent); pointer-events: none; }
+.story__bar .count { font: 600 0.7rem/1 var(--f-sans); letter-spacing: 0.2em; color: var(--pale); pointer-events: none; }
+.story__bar div { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; pointer-events: auto; }
 .story__bar .icon-btn { border-color: rgba(255, 255, 255, 0.35); color: var(--white); background: rgba(3, 13, 28, 0.45); }
 .story__bar .icon-btn:hover { background: var(--white); color: var(--night); }
 .story__bar .btn { min-height: 44px; padding: 0 16px; background: rgba(3, 13, 28, 0.45); }
@@ -432,7 +439,13 @@ a.plist__email:hover { text-decoration: underline; }
   .pp { width: 30px; margin: -20px 0 0 -15px; }
   .pp:hover, .pp:focus-visible { --hs: 1.4; }
   .pp__label { display: none; }
-  .story { width: 100vw; height: 100svh; border-radius: 0; }
+  .story { width: 100vw; height: 100svh; max-height: 100svh; border-radius: 0; }
+  /* On a phone the controls sit above the sheet, so a wrapped row never covers the title. */
+  .story__poster { display: flex; flex-direction: column; }
+  .story__bar { position: relative; top: auto; left: auto; right: auto; order: -1; flex: none; align-items: center; background: #081428; pointer-events: auto; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+  .story__scroll { position: relative; inset: auto; flex: 1 1 auto; min-height: 0; }
+  .story__bar .btn { min-height: 40px; padding: 0 12px; letter-spacing: 0.08em; }
+  .story__bar .icon-btn { width: 40px; height: 40px; }
 }
 /* Narrower screens: the list stacks (project, then leads with their emails). */
 @media (max-width: 900px) {
@@ -447,6 +460,9 @@ a.plist__email:hover { text-decoration: underline; }
 }
 /* Phones: a smaller logo and tighter tabs so all three fit beside it. */
 @media (max-width: 520px) {
+  .story__bar div { flex-wrap: nowrap; }
+  .story__download { position: relative; width: 40px; height: 40px; min-height: 40px; padding: 0; justify-content: center; }
+  .story__download span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .brand img { height: 28px; }
   .nav__inner { gap: 12px; }
   .nav__links { gap: 12px; }
