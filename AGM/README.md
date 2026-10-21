@@ -38,7 +38,7 @@ Fonts and GSAP are vendored, so the page works offline when served from a laptop
 
 ## Editing content
 
-**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-20.41` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
+**After changing any CSS or JS file, bump the version** in `index.html`: search and replace the `?v=2026-10-21.1` string, which appears in the import map, the module preloads, the stylesheet link and the main script. That stops browsers serving a stale mix of old and new files after a refresh or a deploy.
 
 
 - **Projects list:** `assets/project-list.json` (title, leads with optional email, and an optional `poster` slug that adds the "View poster" button).
